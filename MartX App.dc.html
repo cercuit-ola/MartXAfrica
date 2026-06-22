@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: #FFFFFF; -webkit-font-smoothing: antialiased; }
+    ::selection { background: #FF4A17; color: #fff; }
+    a { text-decoration: none; color: inherit; }
+    @keyframes mx-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.7); } }
+    .mx-bottom-nav { display: none; }
+    @media (max-width: 860px) {
+      .mx-nav-center { display: none !important; }
+      .mx-nav-extra { display: none !important; }
+      .mx-bottom-nav { display: flex !important; }
+      .mx-app-main { padding-bottom: 98px !important; }
+    }
+  </style>
+</helmet>
+
+<div style="font-family:'Plus Jakarta Sans',sans-serif; background:#fff; color:#181210; min-height:100vh;">
+
+  <!-- ===================== TOP NAV ===================== -->
+  <nav style="position:sticky; top:0; z-index:50; background:rgba(255,255,255,.82); backdrop-filter:blur(16px); border-bottom:1px solid #F0EAE4;">
+    <div style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,3vw,32px); height:70px; display:flex; align-items:center; gap:18px;">
+      <a href="MartX Platform.dc.html" style="display:flex; align-items:center; gap:9px; cursor:pointer;">
+        <img src="assets/martx-logo.png" alt="MartX" style="width:32px; height:32px; object-fit:contain;" />
+        <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:21px; letter-spacing:-.02em;">Mart<span style="color:#FF4A17;">X</span></span>
+      </a>
+
+      <div class="mx-nav-center" style="display:flex; align-items:center; gap:4px; margin:0 auto;">
+        <div style="{{ nav.explore }}" onClick="{{ goExplore }}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="16 8 14 14 8 16 10 10"/></svg>
+          <span>Explore</span>
+        </div>
+        <div style="{{ nav.dashboard }}" onClick="{{ goDashboard }}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+          <span>Dashboard</span>
+        </div>
+        <div style="{{ nav.orders }}" onClick="{{ goOrders }}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg>
+          <span>Orders</span>
+        </div>
+        <div style="{{ nav.wallet }}" onClick="{{ goWallet }}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><circle cx="17" cy="14.5" r="1.2" fill="currentColor"/></svg>
+          <span>Wallet</span>
+        </div>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:13px;">
+        <span style="display:flex; align-items:center; gap:8px; background:#EF4444; color:#fff; font-weight:700; font-size:14px; padding:9px 16px; border-radius:12px; cursor:pointer;" style-hover="background:#DC2626;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.48M7.76 16.24a6 6 0 0 1 0-8.48"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
+          Go Live
+        </span>
+        <span class="mx-nav-extra" style="display:flex; align-items:center; gap:13px;">
+        <span style="color:#8A827C; cursor:pointer; display:flex;" style-hover="color:#181210;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+        <span style="display:flex; align-items:center; gap:7px; background:#FFF3EC; border:1px solid #F4D9C9; color:#C9461B; font-weight:700; font-size:13.5px; padding:7px 14px; border-radius:999px; cursor:pointer;">Shopper <span style="opacity:.7;">▾</span></span>
+        <span style="position:relative; color:#8A827C; cursor:pointer; display:flex;" style-hover="color:#181210;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span style="position:absolute; top:-1px; right:-1px; width:8px; height:8px; border-radius:50%; background:#FF4A17; border:2px solid #fff;"></span></span>
+        <span style="position:relative; color:#8A827C; cursor:pointer; display:flex;" style-hover="color:#181210;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span style="position:absolute; top:-7px; right:-8px; min-width:17px; height:17px; padding:0 4px; border-radius:999px; background:#FF4A17; color:#fff; font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center;">2</span></span>
+        </span>
+        <span style="width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#FF4A17,#FF9248); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; color:#fff; cursor:pointer;">S</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================== MOBILE BOTTOM NAV ===================== -->
+  <div class="mx-bottom-nav" style="position:fixed; bottom:0; left:0; right:0; z-index:60; background:rgba(255,255,255,.97); backdrop-filter:blur(16px); border-top:1px solid #F0EAE4; padding:7px 6px calc(7px + env(safe-area-inset-bottom)); justify-content:space-around;">
+    <div style="{{ navB.explore }}" onClick="{{ goExplore }}">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="16 8 14 14 8 16 10 10"/></svg>
+      <span>Explore</span>
+    </div>
+    <div style="{{ navB.dashboard }}" onClick="{{ goDashboard }}">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+      <span>Dashboard</span>
+    </div>
+    <div style="{{ navB.orders }}" onClick="{{ goOrders }}">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg>
+      <span>Orders</span>
+    </div>
+    <div style="{{ navB.wallet }}" onClick="{{ goWallet }}">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><circle cx="17" cy="14.5" r="1.2" fill="currentColor"/></svg>
+      <span>Wallet</span>
+    </div>
+  </div>
+
+  <!-- ===================== EXPLORE ===================== -->
+  <sc-if value="{{ isExplore }}" hint-placeholder-val="{{ true }}">
+  <main class="mx-app-main" style="max-width:1280px; margin:0 auto; padding:clamp(28px,4vw,48px) clamp(16px,3vw,32px) 64px;">
+    <div style="display:flex; flex-wrap:wrap; gap:20px; align-items:flex-start; justify-content:space-between; margin-bottom:30px;">
+      <div>
+        <h1 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(34px,4.5vw,52px); letter-spacing:-.03em; margin:0 0 8px;">Explore</h1>
+        <p style="font-size:16px; color:#6B635E; margin:0;">Discover unique products from creators and vendors</p>
+      </div>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <div style="display:flex; align-items:center; gap:10px; background:#fff; border:1px solid #E7E1DB; border-radius:13px; padding:12px 16px; width:min(360px,60vw);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9B938D" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <span style="color:#9B938D; font-size:15px;">Search products…</span>
+        </div>
+        <span style="width:48px; height:48px; border:1px solid #E7E1DB; background:#fff; border-radius:13px; display:flex; align-items:center; justify-content:center; color:#56504B; cursor:pointer;" style-hover="border-color:#181210;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h11M4 12h16M4 17h7"/><circle cx="17" cy="7" r="2"/><circle cx="13" cy="17" r="2"/></svg></span>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px;">
+      <sc-for list="{{ catChips }}" as="c" hint-placeholder-count="8">
+        <span style="{{ c.style }}" onClick="{{ c.onClick }}">{{ c.name }}</span>
+      </sc-for>
+    </div>
+
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:22px;">
+      <div style="font-size:15px; color:#6B635E;">Showing <b style="color:#181210;">{{ count }}</b> products</div>
+      <div style="display:flex; gap:10px;">
+        <span style="background:#fff; border:1px solid #E7E1DB; color:#56504B; font-size:13px; font-weight:600; padding:8px 14px; border-radius:999px; cursor:pointer;">All Sellers</span>
+        <span style="background:#fff; border:1px solid #E7E1DB; color:#56504B; font-size:13px; font-weight:600; padding:8px 14px; border-radius:999px; cursor:pointer;">Price: Any</span>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(248px,1fr)); gap:20px;">
+      <sc-for list="{{ visibleProducts }}" as="p" hint-placeholder-count="8">
+        <div style="background:#fff; border:1px solid #EFE9E3; border-radius:18px; overflow:hidden;" style-hover="border-color:#181210;">
+          <div style="position:relative; aspect-ratio:1/1; background:#F5F0EB;">
+            <div style="{{ p.thumbStyle }}"></div>
+            <sc-if value="{{ p.discount }}" hint-placeholder-val="-20%"><span style="position:absolute; top:13px; left:13px; background:#EF4444; color:#fff; font-weight:800; font-size:12px; padding:5px 9px; border-radius:8px;">{{ p.discount }}</span></sc-if>
+            <span style="position:absolute; top:13px; right:13px; width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.85); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; color:#56504B; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.08);" style-hover="color:#FF4A17;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A4.5 4.5 0 0 0 12 6 4.5 4.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></span>
+          </div>
+          <div style="padding:16px;">
+            <span style="{{ p.typeStyle }}">{{ p.type }}</span>
+            <div style="font-weight:700; font-size:16px; color:#181210; margin:13px 0 4px; line-height:1.25;">{{ p.name }}</div>
+            <div style="font-size:13px; color:#9B938D; margin-bottom:14px;">{{ p.vendor }}</div>
+            <div style="display:flex; align-items:center; gap:9px; margin-bottom:13px;">
+              <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:20px; color:#181210;">{{ p.price }}</span>
+              <sc-if value="{{ p.oldPrice }}" hint-placeholder-val="$0"><span style="font-size:13px; color:#B7AFA8; text-decoration:line-through;">{{ p.oldPrice }}</span></sc-if>
+              <span style="margin-left:auto; display:flex; align-items:center; gap:4px; color:#F59E0B; font-weight:700; font-size:14px;">★<span style="color:#6B635E;">{{ p.rating }}</span></span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; color:#2563EB; font-size:13px; font-weight:600; margin-bottom:14px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>Escrow</div>
+            <span style="display:flex; align-items:center; justify-content:center; gap:8px; background:#FF4A17; color:#fff; font-weight:700; font-size:14px; padding:12px; border-radius:12px; cursor:pointer;" style-hover="background:#E63E0C;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.5l2.2 12.2a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.5L22 7H6"/></svg>Add to Cart</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align:center; color:#9B938D; padding:80px 20px; font-size:16px;">No products in this category yet — check back soon.</div>
+    </sc-if>
+  </main>
+  </sc-if>
+
+  <!-- ===================== DASHBOARD ===================== -->
+  <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ false }}">
+  <main class="mx-app-main" style="max-width:1280px; margin:0 auto; padding:clamp(28px,4vw,48px) clamp(16px,3vw,32px) 56px;">
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:6px;">
+      <h1 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(32px,4.2vw,48px); letter-spacing:-.03em; margin:0;">Dashboard</h1>
+      <span style="background:#F4EFEA; color:#56504B; font-weight:600; font-size:13px; padding:6px 13px; border-radius:999px;">Shopper</span>
+    </div>
+    <p style="font-size:16px; color:#6B635E; margin:0 0 32px;">Welcome back, Samuel! Here's what's happening.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin-bottom:44px;">
+      <div style="background:#fff; border:1px solid #EFE9E3; border-radius:18px; padding:24px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <span style="width:48px; height:48px; border-radius:13px; background:#FFF3EC; display:flex; align-items:center; justify-content:center; color:#FF4A17;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+          <div><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:30px;">5</div><div style="font-size:13.5px; color:#8A827C;">Total Orders</div></div>
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid #EFE9E3; border-radius:18px; padding:24px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <span style="width:48px; height:48px; border-radius:13px; background:#EAF1FE; display:flex; align-items:center; justify-content:center; color:#2563EB;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></span>
+          <div><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:30px;">1</div><div style="font-size:13.5px; color:#8A827C;">In Escrow</div></div>
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid #EFE9E3; border-radius:18px; padding:24px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <span style="width:48px; height:48px; border-radius:13px; background:#F3ECFD; display:flex; align-items:center; justify-content:center; color:#7C3AED;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="8" r="4"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
+          <div><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:30px;">8</div><div style="font-size:13.5px; color:#8A827C;">Following</div></div>
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid #EFE9E3; border-radius:18px; padding:24px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <span style="width:48px; height:48px; border-radius:13px; background:#E7F6F0; display:flex; align-items:center; justify-content:center; color:#059669;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <div><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:30px;">12h</div><div style="font-size:13.5px; color:#8A827C;">Watched</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:24px; letter-spacing:-.02em; margin:0;">Recent Orders</h2>
+      <span style="display:flex; align-items:center; gap:5px; color:#FF4A17; font-weight:600; font-size:14px; cursor:pointer;" onClick="{{ goOrders }}">View All ›</span>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:18px;">
+      <!-- escrow order -->
+      <div style="background:#fff; border:1px solid #EFE9E3; border-radius:18px; padding:22px;">
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:18px;">
+          <div><div style="font-weight:700; font-size:14.5px; color:#181210;">Order #MX-2024-001</div><div style="font-size:13px; color:#9B938D; margin-top:2px;">Jan 5, 2026</div></div>
+          <span style="display:flex; align-items:center; gap:6px; background:rgba(37,99,235,.1); color:#2563EB; font-weight:700; font-size:12.5px; padding:6px 11px; border-radius:9px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5Z"/></svg>Paid (In Escrow)</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:13px; margin-bottom:18px;">
+          <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=200&q=80&auto=format&fit=crop" alt="" style="width:52px; height:52px; border-radius:11px; object-fit:cover;" />
+          <div><div style="font-weight:700; font-size:16px; color:#181210;">Minimalist Leather Tote Bag</div><div style="font-size:13px; color:#9B938D; margin-top:2px;">from StyleByMia</div></div>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; background:#EAF1FE; border:1px solid rgba(37,99,235,.18); border-radius:12px; padding:12px 15px; margin-bottom:18px;">
+          <span style="display:flex; align-items:center; gap:8px; color:#2563EB; font-weight:600; font-size:13.5px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Escrow Protection Active</span>
+          <span style="font-size:13px; color:#6B635E;">Releases Jan 12, 2026</span>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid #EFE9E3; padding-top:16px;">
+          <div><div style="font-size:12.5px; color:#9B938D;">Total</div><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:22px;">$89.99</div></div>
+          <span style="display:flex; align-items:center; gap:5px; color:#181210; font-weight:600; font-size:14px; cursor:pointer;">View Details ›</span>
+        </div>
+      </div>
+      <!-- delivered order -->
+      <div style="background:#fff; border:1px solid #EFE9E3; border-radius:18px; padding:22px;">
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:18px;">
+          <div><div style="font-weight:700; font-size:14.5px; color:#181210;">Order #MX-2024-002</div><div style="font-size:13px; color:#9B938D; margin-top:2px;">Jan 3, 2026</div></div>
+          <span style="display:flex; align-items:center; gap:6px; background:rgba(5,150,105,.1); color:#059669; font-weight:700; font-size:12.5px; padding:6px 11px; border-radius:9px;">● Delivered</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:13px; margin-bottom:18px;">
+          <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=200&q=80&auto=format&fit=crop" alt="" style="width:52px; height:52px; border-radius:11px; object-fit:cover;" />
+          <div><div style="font-weight:700; font-size:16px; color:#181210;">Wireless Earbuds Pro</div><div style="font-size:13px; color:#9B938D; margin-top:2px;">from TechTrends Store</div></div>
+        </div>
+        <span style="display:flex; align-items:center; justify-content:center; gap:9px; background:#059669; color:#fff; font-weight:700; font-size:14.5px; padding:14px; border-radius:12px; margin-bottom:18px; cursor:pointer;" style-hover="background:#047857;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>Confirm Delivery & Release Funds</span>
+        <div style="display:flex; align-items:center; justify-content:space-between; border-top:1px solid #EFE9E3; padding-top:16px;">
+          <div><div style="font-size:12.5px; color:#9B938D;">Total</div><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:22px;">$79.99</div></div>
+          <span style="display:flex; align-items:center; gap:5px; color:#181210; font-weight:600; font-size:14px; cursor:pointer;">View Details ›</span>
+        </div>
+      </div>
+    </div>
+  </main>
+  </sc-if>
+
+  <!-- ===================== ORDERS ===================== -->
+  <sc-if value="{{ isOrders }}" hint-placeholder-val="{{ false }}">
+  <main class="mx-app-main" style="max-width:1280px; margin:0 auto; padding:clamp(28px,4vw,48px) clamp(16px,3vw,32px) 56px;">
+    <div style="display:flex; flex-wrap:wrap; gap:20px; align-items:flex-start; justify-content:space-between; margin-bottom:28px;">
+      <div>
+        <h1 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(32px,4.2vw,48px); letter-spacing:-.03em; margin:0 0 8px;">Orders</h1>
+        <p style="font-size:16px; color:#6B635E; margin:0;">Track your purchases and escrow status</p>
+      </div>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <div style="display:flex; align-items:center; gap:10px; background:#fff; border:1px solid #E7E1DB; border-radius:13px; padding:12px 16px; width:min(320px,60vw);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9B938D" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <span style="color:#9B938D; font-size:15px;">Search orders…</span>
+        </div>
+        <span style="width:48px; height:48px; border:1px solid #E7E1DB; background:#fff; border-radius:13px; display:flex; align-items:center; justify-content:center; color:#56504B; cursor:pointer;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3H2l8 9.5V19l4 2v-8.5L22 3Z"/></svg></span>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:16px; background:#EAF1FE; border:1px solid rgba(37,99,235,.18); border-radius:16px; padding:18px 22px; margin-bottom:26px;">
+      <span style="width:46px; height:46px; border-radius:12px; background:#DCE8FD; display:flex; align-items:center; justify-content:center; color:#2563EB; flex:none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></span>
+      <div><div style="font-weight:700; font-size:16.5px; color:#181210; margin-bottom:3px;">Escrow Protection Active</div><div style="font-size:14px; color:#6B635E;">All payments are held securely until delivery is confirmed or auto-released after 7 days.</div></div>
+    </div>
+
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px;">
+      <sc-for list="{{ orderTabs }}" as="t" hint-placeholder-count="5">
+        <span style="{{ t.style }}" onClick="{{ t.onClick }}">{{ t.name }}</span>
+      </sc-for>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <sc-for list="{{ visibleOrders }}" as="o" hint-placeholder-count="4">
+        <div style="background:#fff; border:1px solid #EFE9E3; border-radius:16px; padding:18px 20px; display:flex; align-items:center; gap:18px; flex-wrap:wrap;">
+          <div style="{{ o.thumbStyle }}"></div>
+          <div style="flex:1 1 200px; min-width:160px;">
+            <div style="font-weight:700; font-size:16px; color:#181210;">{{ o.name }}</div>
+            <div style="font-size:13px; color:#9B938D; margin-top:2px;">from {{ o.vendor }}</div>
+            <div style="font-size:12.5px; color:#B7AFA8; margin-top:6px;">{{ o.orderNo }} · {{ o.date }}</div>
+          </div>
+          <span style="{{ o.statusStyle }}">{{ o.statusLabel }}</span>
+          <div style="text-align:right; min-width:90px;">
+            <div style="font-size:12px; color:#9B938D;">Total</div>
+            <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:20px;">{{ o.total }}</div>
+          </div>
+          <span style="display:flex; align-items:center; gap:5px; color:#56504B; font-weight:600; font-size:14px; cursor:pointer; white-space:nowrap;" style-hover="color:#181210;">Details ›</span>
+        </div>
+      </sc-for>
+      <sc-if value="{{ ordersEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center; color:#9B938D; padding:60px 20px; font-size:15px; background:#FBF8F5; border:1px solid #EFE9E3; border-radius:16px;">No orders in this status.</div>
+      </sc-if>
+    </div>
+  </main>
+  </sc-if>
+
+  <!-- ===================== WALLET ===================== -->
+  <sc-if value="{{ isWallet }}" hint-placeholder-val="{{ false }}">
+  <main class="mx-app-main" style="max-width:1280px; margin:0 auto; padding:clamp(28px,4vw,48px) clamp(16px,3vw,32px) 56px;">
+    <div style="display:flex; flex-wrap:wrap; gap:20px; align-items:flex-start; justify-content:space-between; margin-bottom:30px;">
+      <div>
+        <div style="display:flex; align-items:center; gap:13px; margin-bottom:8px;">
+          <h1 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(32px,4.2vw,48px); letter-spacing:-.03em; margin:0;">Wallet</h1>
+          <span style="display:flex; align-items:center; gap:5px; background:linear-gradient(135deg,#A855F7,#FF4A17); color:#fff; font-weight:700; font-size:12.5px; padding:6px 13px; border-radius:999px;">✦ Upgraded</span>
+        </div>
+        <p style="font-size:16px; color:#6B635E; margin:0;">Top up, redeem gift cards, and manage crypto — all in one place</p>
+      </div>
+      <span style="display:flex; align-items:center; gap:8px; background:#FF4A17; color:#fff; font-weight:700; font-size:15px; padding:13px 22px; border-radius:13px; cursor:pointer;" style-hover="background:#E63E0C;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Top Up Wallet</span>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#FF4A17,#FF8A3D); border-radius:22px; padding:30px; margin-bottom:20px; position:relative; overflow:hidden; box-shadow:0 24px 56px -28px rgba(255,74,23,.5);">
+      <div style="position:absolute; top:-50px; right:-30px; width:200px; height:200px; border-radius:50%; background:rgba(255,255,255,.12);"></div>
+      <div style="position:relative; display:flex; align-items:flex-start; gap:18px;">
+        <span style="width:54px; height:54px; border-radius:15px; background:rgba(255,255,255,.22); display:flex; align-items:center; justify-content:center; color:#fff; flex:none;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><circle cx="17" cy="14.5" r="1.3" fill="currentColor"/></svg></span>
+        <div style="flex:1;">
+          <div style="font-size:14px; color:rgba(255,255,255,.88); font-weight:600;">Total Balance</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:46px; letter-spacing:-.02em; color:#fff;">$842.50</div>
+        </div>
+        <span style="background:rgba(255,255,255,.25); color:#fff; font-weight:700; font-size:12.5px; padding:6px 13px; border-radius:999px;">Available</span>
+      </div>
+      <span style="position:relative; display:flex; align-items:center; justify-content:center; gap:8px; margin-top:22px; background:rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.32); color:#fff; font-weight:700; font-size:15px; padding:14px; border-radius:14px; cursor:pointer;" style-hover="background:rgba(255,255,255,.3);"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Top Up</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px; margin-bottom:20px;">
+      <div style="background:#fff; border:1px solid #EFE9E3; border-radius:18px; padding:24px; cursor:pointer;" style-hover="border-color:#181210;">
+        <span style="width:50px; height:50px; border-radius:14px; background:linear-gradient(135deg,#FB7185,#FF4A17); display:flex; align-items:center; justify-content:center; color:#fff; margin-bottom:18px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9"/><path d="M12 8S9.5 3 7 4.2 8.5 8 12 8m0 0s2.5-5 5-3.8S15.5 8 12 8"/></svg></span>
+        <div style="display:flex; align-items:center; justify-content:space-between;"><h3 style="font-weight:700; font-size:19px; margin:0; color:#181210;">Redeem Gift Cards</h3><span style="color:#B7AFA8;">›</span></div>
+        <p style="font-size:14.5px; color:#6B635E; margin:8px 0 14px; line-height:1.5;">Instantly convert gift cards to wallet balance. Get paid automatically!</p>
+        <div style="display:flex; align-items:center; gap:7px; color:#FF4A17; font-weight:600; font-size:13.5px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>20% service fee</div>
+      </div>
+      <div style="background:#fff; border:1px solid #EFE9E3; border-radius:18px; padding:24px; cursor:pointer;" style-hover="border-color:#181210;">
+        <span style="width:50px; height:50px; border-radius:14px; background:linear-gradient(135deg,#FBBF24,#F59E0B); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:24px; margin-bottom:18px;">₿</span>
+        <div style="display:flex; align-items:center; justify-content:space-between;"><h3 style="font-weight:700; font-size:19px; margin:0; color:#181210;">Crypto On/Off Ramp</h3><span style="color:#B7AFA8;">›</span></div>
+        <p style="font-size:14.5px; color:#6B635E; margin:8px 0 14px; line-height:1.5;">Buy, sell, and manage crypto. Cash out with transparent fees!</p>
+        <div style="display:flex; gap:8px;">
+          <span style="background:#F4EFEA; color:#56504B; font-weight:600; font-size:13px; padding:6px 14px; border-radius:999px;">Buy</span>
+          <span style="background:#F4EFEA; color:#56504B; font-weight:600; font-size:13px; padding:6px 14px; border-radius:999px;">Sell</span>
+          <span style="background:#F4EFEA; color:#56504B; font-weight:600; font-size:13px; padding:6px 14px; border-radius:999px;">Send</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#FFF6F1; border:1px solid #F4E2D5; border-radius:18px; padding:24px; margin-bottom:20px;">
+      <div style="display:flex; align-items:center; gap:14px; margin-bottom:18px;">
+        <span style="width:46px; height:46px; border-radius:12px; background:linear-gradient(135deg,#FBBF24,#F59E0B); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:22px;">₿</span>
+        <div><div style="font-size:13.5px; color:#8A827C;">Crypto Balance</div><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:26px; color:#181210;">128.40 USDT</div></div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px;">
+        <span style="display:flex; align-items:center; justify-content:center; gap:7px; background:#fff; border:1px solid #E7E1DB; color:#181210; font-weight:600; font-size:14px; padding:13px; border-radius:12px; cursor:pointer;" style-hover="border-color:#181210;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>Buy</span>
+        <span style="display:flex; align-items:center; justify-content:center; gap:7px; background:#fff; border:1px solid #E7E1DB; color:#181210; font-weight:600; font-size:14px; padding:13px; border-radius:12px; cursor:pointer;" style-hover="border-color:#181210;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Sell</span>
+        <span style="display:flex; align-items:center; justify-content:center; gap:7px; background:#fff; border:1px solid #E7E1DB; color:#181210; font-weight:600; font-size:14px; padding:13px; border-radius:12px; cursor:pointer;" style-hover="border-color:#181210;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/></svg>Send</span>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px;">
+      <div style="background:#fff; border:1px solid #EFE9E3; border-radius:16px; padding:20px; cursor:pointer;" style-hover="border-color:#181210;"><span style="width:42px; height:42px; border-radius:11px; background:#FFF3EC; display:flex; align-items:center; justify-content:center; color:#FF4A17; margin-bottom:13px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><div style="font-weight:700; font-size:15.5px; color:#181210;">Top Up</div><div style="font-size:13px; color:#8A827C; margin-top:3px;">Add funds via card or bank</div></div>
+      <div style="background:#fff; border:1px solid #EFE9E3; border-radius:16px; padding:20px; cursor:pointer;" style-hover="border-color:#181210;"><span style="width:42px; height:42px; border-radius:11px; background:#F3ECFD; display:flex; align-items:center; justify-content:center; color:#7C3AED; margin-bottom:13px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9"/></svg></span><div style="font-weight:700; font-size:15.5px; color:#181210;">Gift Cards</div><div style="font-size:13px; color:#8A827C; margin-top:3px;">Redeem & manage cards</div></div>
+      <div style="background:#fff; border:1px solid #EFE9E3; border-radius:16px; padding:20px; cursor:pointer;" style-hover="border-color:#181210;"><span style="width:42px; height:42px; border-radius:11px; background:#FEF3C7; display:flex; align-items:center; justify-content:center; color:#D97706; font-weight:800; font-size:18px; margin-bottom:13px;">₿</span><div style="font-weight:700; font-size:15.5px; color:#181210;">Crypto</div><div style="font-size:13px; color:#8A827C; margin-top:3px;">Buy, sell and send USDT</div></div>
+      <div style="background:#fff; border:1px solid #EFE9E3; border-radius:16px; padding:20px; cursor:pointer;" style-hover="border-color:#181210;"><span style="width:42px; height:42px; border-radius:11px; background:#EAF1FE; display:flex; align-items:center; justify-content:center; color:#2563EB; margin-bottom:13px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 21v.01M17 21h-3"/></svg></span><div style="font-weight:700; font-size:15.5px; color:#181210;">Scan to Pay</div><div style="font-size:13px; color:#8A827C; margin-top:3px;">Pay vendors instantly</div></div>
+    </div>
+  </main>
+  </sc-if>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer style="border-top:1px solid #F0EAE4; background:#fff;">
+    <div style="max-width:1280px; margin:0 auto; padding:44px clamp(16px,3vw,32px) 28px; display:flex; flex-wrap:wrap; gap:40px; justify-content:space-between;">
+      <div style="max-width:280px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+          <img src="assets/martx-logo.png" alt="MartX" style="width:30px; height:30px; object-fit:contain;" />
+          <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:19px;">Mart<span style="color:#FF4A17;">X</span></span>
+        </div>
+        <p style="font-size:14px; line-height:1.55; color:#8A827C; margin:0 0 16px;">Africa's premier live social commerce marketplace.</p>
+        <div style="display:flex; align-items:center; gap:7px; color:#FF4A17; font-weight:600; font-size:13.5px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>Escrow Protected</div>
+      </div>
+      <div style="display:flex; gap:clamp(36px,6vw,80px); flex-wrap:wrap;">
+        <div>
+          <div style="font-weight:700; font-size:12px; letter-spacing:.12em; color:#9B938D; margin-bottom:14px;">SHOP</div>
+          <div style="display:flex; flex-direction:column; gap:11px; font-size:14px; color:#56504B;"><span style="cursor:pointer;">Explore</span><span style="cursor:pointer;">Categories</span><span style="cursor:pointer;">Trending</span></div>
+        </div>
+        <div>
+          <div style="font-weight:700; font-size:12px; letter-spacing:.12em; color:#9B938D; margin-bottom:14px;">SELL</div>
+          <div style="display:flex; flex-direction:column; gap:11px; font-size:14px; color:#56504B;"><span style="cursor:pointer;">Become a Creator</span><span style="cursor:pointer;">Become a Vendor</span><span style="cursor:pointer;">Escrow Info</span></div>
+        </div>
+        <div>
+          <div style="font-weight:700; font-size:12px; letter-spacing:.12em; color:#9B938D; margin-bottom:14px;">SUPPORT</div>
+          <div style="display:flex; flex-direction:column; gap:11px; font-size:14px; color:#56504B;"><span style="cursor:pointer;">Help Center</span><span style="cursor:pointer;">Safety</span><span style="cursor:pointer;">Contact</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #F0EAE4;">
+      <div style="max-width:1280px; margin:0 auto; padding:18px clamp(16px,3vw,32px); display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; font-size:13px; color:#9B938D;">
+        <span>© 2026 MartX. All rights reserved.</span>
+        <span style="display:flex; gap:22px;"><span style="cursor:pointer;">Terms</span><span style="cursor:pointer;">Privacy</span></span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { screen: 'explore', cat: 'All', ordersTab: 'All Orders' };
+
+  componentDidMount() {
+    const valid = ['explore', 'dashboard', 'orders', 'wallet'];
+    const fromHash = () => {
+      const h = (location.hash || '').replace('#', '');
+      if (valid.includes(h)) this.setState({ screen: h });
+    };
+    fromHash();
+    this._onHash = fromHash;
+    window.addEventListener('hashchange', this._onHash);
+  }
+  componentWillUnmount() { if (this._onHash) window.removeEventListener('hashchange', this._onHash); }
+
+  go(s) { try { history.replaceState(null, '', '#' + s); } catch (e) {} this.setState({ screen: s }); }
+
+  U(id) { return 'https://images.unsplash.com/' + id + '?w=700&q=80&auto=format&fit=crop'; }
+
+  renderVals() {
+    const screen = this.state.screen;
+    const go = (s) => () => this.go(s);
+
+    const navStyleFor = (key) => {
+      const active = screen === key;
+      return {
+        display: 'flex', alignItems: 'center', gap: '8px',
+        padding: '9px 15px', borderRadius: '11px', cursor: 'pointer',
+        fontWeight: 600, fontSize: '15px', transition: 'all .15s ease',
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        color: active ? '#FF4A17' : '#56504B',
+        background: active ? '#FFF3EC' : 'transparent',
+      };
+    };
+    const navBottomFor = (key) => ({
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      gap: '3px', flex: '1', padding: '4px 0', cursor: 'pointer',
+      fontSize: '11px', fontWeight: 600, fontFamily: "'Plus Jakarta Sans', sans-serif",
+      color: screen === key ? '#FF4A17' : '#9B938D',
+    });
+
+    // ----- Explore -----
+    const typeStyle = (t) => ({
+      display: 'inline-flex', alignItems: 'center', padding: '4px 11px',
+      borderRadius: '8px', fontWeight: 700, fontSize: '12px',
+      fontFamily: "'Plus Jakarta Sans', sans-serif",
+      color: t === 'Creator' ? '#7C3AED' : '#059669',
+      background: t === 'Creator' ? 'rgba(124,58,237,.1)' : 'rgba(5,150,105,.1)',
+      border: '1px solid ' + (t === 'Creator' ? 'rgba(124,58,237,.22)' : 'rgba(5,150,105,.22)'),
+    });
+    const P = [
+      { name: 'Minimalist Leather Tote Bag', vendor: 'StyleByMia',      type: 'Creator', price: '$89.99',  oldPrice: '$129.99', rating: '4.8', discount: '-31%', cat: 'Fashion',     img: this.U('photo-1584917865442-de89df76afd3') },
+      { name: 'Wireless Noise-Canceling Earbuds', vendor: 'TechTrends Store', type: 'Vendor', price: '$79.99', rating: '4.9', cat: 'Electronics', img: this.U('photo-1590658268037-6bf12165a8df') },
+      { name: 'Handcrafted Silver Necklace', vendor: 'CraftedByElena',  type: 'Creator', price: '$45.00',  rating: '5.0', cat: 'Jewelry',     img: this.U('photo-1611652022419-a9419f74343d') },
+      { name: 'Limited Edition Retro Jordans', vendor: 'SneakerVault',  type: 'Vendor',  price: '$299.99', oldPrice: '$350.00', rating: '4.7', discount: '-14%', cat: 'Sports',  img: this.U('photo-1552346154-21d32810aba3') },
+      { name: 'Ankara Wrap Dress',          vendor: 'Lola Threads',     type: 'Creator', price: '$34.99',  rating: '4.9', cat: 'Fashion',     img: this.U('photo-1617922001439-4a2e6562f328') },
+      { name: 'Shea Glow Body Oil',         vendor: 'Kọ́la Beauty',      type: 'Vendor',  price: '$12.50',  oldPrice: '$16.00', rating: '4.6', discount: '-22%', cat: 'Beauty', img: this.U('photo-1556228720-195a672e8a03') },
+      { name: 'Handwoven Kente Throw',      vendor: 'Asante Looms',     type: 'Vendor',  price: '$58.00',  rating: '4.8', cat: 'Home',        img: this.U('photo-1610030469983-98e550d6193c') },
+      { name: 'Beaded Statement Set',       vendor: 'Zuri Craft',       type: 'Creator', price: '$22.00',  rating: '4.9', cat: 'Jewelry',     img: this.U('photo-1599643478518-a784e5dc4c8f') },
+      { name: 'Jollof Spice Blend',         vendor: 'Mama Spice Co.',   type: 'Vendor',  price: '$8.99',   rating: '4.7', cat: 'Home',        img: this.U('photo-1596040033229-a9821ebd058d') },
+      { name: 'Minimalist Smart Watch',     vendor: 'TechHub NG',       type: 'Vendor',  price: '$129.99', oldPrice: '$159.99', rating: '4.5', discount: '-19%', cat: 'Electronics', img: this.U('photo-1523275335684-37898b6baf30') },
+      { name: 'African Black Soap Set',     vendor: 'Kọ́la Beauty',      type: 'Vendor',  price: '$9.50',   rating: '4.8', cat: 'Beauty',      img: this.U('photo-1600857544200-b2f666a9a2ec') },
+      { name: 'Adire Silk Headwrap',        vendor: 'Lola Threads',     type: 'Creator', price: '$18.00',  rating: '5.0', cat: 'Fashion',     img: this.U('photo-1531123897727-8f129e1688ce') },
+    ];
+    const cats = ['All', 'Fashion', 'Electronics', 'Beauty', 'Home', 'Jewelry', 'Sports', 'Collectibles'];
+    const setCat = (c) => this.setState({ cat: c });
+    const catChips = cats.map(c => ({
+      name: c, onClick: () => setCat(c),
+      style: {
+        padding: '10px 18px', borderRadius: '11px', cursor: 'pointer',
+        fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600, fontSize: '14px',
+        whiteSpace: 'nowrap', transition: 'all .15s ease',
+        border: '1px solid ' + (this.state.cat === c ? '#181210' : '#E7E1DB'),
+        background: this.state.cat === c ? '#181210' : '#FFFFFF',
+        color: this.state.cat === c ? '#FFFFFF' : '#56504B',
+      },
+    }));
+    const visibleProducts = (this.state.cat === 'All' ? P : P.filter(p => p.cat === this.state.cat))
+      .map(p => ({ ...p, typeStyle: typeStyle(p.type),
+        thumbStyle: { position: 'absolute', inset: 0, width: '100%', height: '100%', backgroundImage: 'url(' + p.img + ')', backgroundSize: 'cover', backgroundPosition: 'center' } }));
+
+    // ----- Orders -----
+    const statusStyleFor = (color) => ({
+      display: 'inline-flex', alignItems: 'center', gap: '6px',
+      padding: '7px 13px', borderRadius: '9px', fontWeight: 700, fontSize: '12.5px',
+      fontFamily: "'Plus Jakarta Sans', sans-serif", whiteSpace: 'nowrap',
+      color: color.fg, background: color.bg, border: '1px solid ' + color.bd,
+    });
+    const C = {
+      blue:  { fg: '#2563EB', bg: 'rgba(37,99,235,.1)',  bd: 'rgba(37,99,235,.22)' },
+      green: { fg: '#059669', bg: 'rgba(5,150,105,.1)',  bd: 'rgba(5,150,105,.22)' },
+      amber: { fg: '#C2410C', bg: 'rgba(234,88,12,.1)',  bd: 'rgba(234,88,12,.22)' },
+      red:   { fg: '#DC2626', bg: 'rgba(220,38,38,.1)',  bd: 'rgba(220,38,38,.22)' },
+    };
+    const O = [
+      { name: 'Minimalist Leather Tote Bag', vendor: 'StyleByMia',   orderNo: '#MX-2024-001', date: 'Jan 5, 2026', total: '$89.99',  tab: 'In Escrow', statusLabel: 'Paid (In Escrow)', color: C.blue,  img: this.U('photo-1584917865442-de89df76afd3') },
+      { name: 'Wireless Earbuds Pro',        vendor: 'TechTrends Store', orderNo: '#MX-2024-002', date: 'Jan 3, 2026', total: '$79.99', tab: 'Active',    statusLabel: 'Delivered',        color: C.green, img: this.U('photo-1590658268037-6bf12165a8df') },
+      { name: 'Ankara Wrap Dress',           vendor: 'Lola Threads', orderNo: '#MX-2024-005', date: 'Dec 18, 2025', total: '$34.99', tab: 'Active',    statusLabel: 'Shipped',          color: C.amber, img: this.U('photo-1617922001439-4a2e6562f328') },
+      { name: 'Handcrafted Silver Necklace', vendor: 'CraftedByElena', orderNo: '#MX-2024-003', date: 'Dec 28, 2025', total: '$45.00', tab: 'Completed', statusLabel: 'Completed',        color: C.green, img: this.U('photo-1611652022419-a9419f74343d') },
+      { name: 'Limited Edition Retro Jordans', vendor: 'SneakerVault', orderNo: '#MX-2024-004', date: 'Dec 20, 2025', total: '$299.99', tab: 'Disputed', statusLabel: 'Disputed',        color: C.red,   img: this.U('photo-1552346154-21d32810aba3') },
+    ];
+    const tabs = ['All Orders', 'In Escrow', 'Active', 'Completed', 'Disputed'];
+    const setTab = (t) => this.setState({ ordersTab: t });
+    const orderTabs = tabs.map(t => ({
+      name: t, onClick: () => setTab(t),
+      style: {
+        padding: '10px 18px', borderRadius: '11px', cursor: 'pointer',
+        fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600, fontSize: '14px',
+        whiteSpace: 'nowrap', transition: 'all .15s ease',
+        color: this.state.ordersTab === t ? '#FFFFFF' : '#56504B',
+        background: this.state.ordersTab === t ? '#181210' : '#FFFFFF',
+        border: '1px solid ' + (this.state.ordersTab === t ? '#181210' : '#E7E1DB'),
+      },
+    }));
+    const visibleOrders = (this.state.ordersTab === 'All Orders' ? O : O.filter(o => o.tab === this.state.ordersTab))
+      .map(o => ({ ...o, statusStyle: statusStyleFor(o.color),
+        thumbStyle: { width: '62px', height: '62px', borderRadius: '12px', flex: 'none', backgroundImage: 'url(' + o.img + ')', backgroundSize: 'cover', backgroundPosition: 'center' } }));
+
+    return {
+      goExplore: go('explore'), goDashboard: go('dashboard'), goOrders: go('orders'), goWallet: go('wallet'),
+      nav: { explore: navStyleFor('explore'), dashboard: navStyleFor('dashboard'), orders: navStyleFor('orders'), wallet: navStyleFor('wallet') },
+      navB: { explore: navBottomFor('explore'), dashboard: navBottomFor('dashboard'), orders: navBottomFor('orders'), wallet: navBottomFor('wallet') },
+      isExplore: screen === 'explore', isDashboard: screen === 'dashboard', isOrders: screen === 'orders', isWallet: screen === 'wallet',
+      catChips, visibleProducts, count: visibleProducts.length, empty: visibleProducts.length === 0,
+      orderTabs, visibleOrders, ordersEmpty: visibleOrders.length === 0,
+    };
+  }
+}
+</script>
+</body>
+</html>
