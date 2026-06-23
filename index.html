@@ -10,132 +10,237 @@
 <helmet>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
-    body { margin: 0; background: #FFFFFF; -webkit-font-smoothing: antialiased; }
-    ::selection { background: #FF4A17; color: #fff; }
-    @keyframes mx-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.8); } }
-    @keyframes mx-float { 0% { transform: translateY(0) scale(.7); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(-180px) scale(1.1); opacity: 0; } }
-    @keyframes mx-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    a { text-decoration: none; }
-    @media (max-width: 760px) {
+    body { margin: 0; background: #0C0A0B; -webkit-font-smoothing: antialiased; }
+    ::selection { background: #FF2E7E; color: #fff; }
+    a { text-decoration: none; color: inherit; }
+    @keyframes mx-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .3; transform: scale(.7); } }
+    @keyframes mx-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+    @keyframes mx-float2 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(11px); } }
+    @keyframes mx-marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes mx-marqR { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    @keyframes mx-glow { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+    @keyframes mx-spin { to { transform: rotate(360deg); } }
+    @keyframes mx-rise { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: none; } }
+    .reveal { animation: mx-rise both linear; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+    @media (prefers-reduced-motion: reduce) { .reveal { animation: none; } }
+    @media (max-width: 860px) {
       .mx-nav-links { display: none !important; }
-      .mx-nav-signin { display: none !important; }
+      .mx-nav-secondary { display: none !important; }
     }
+    @media (max-width: 820px) {
+      .mx-bento { grid-template-columns: 1fr !important; }
+      .mx-bento-feature { grid-column: auto !important; grid-row: auto !important; min-height: 380px !important; }
+    }
+    @media (max-width: 620px) { .mx-float-extra { display: none !important; } }
   </style>
 </helmet>
 
-<div style="font-family:'Plus Jakarta Sans',sans-serif; color:#181210; background:#fff; overflow-x:hidden;">
+<div id="mx-root" style="font-family:'Plus Jakarta Sans',sans-serif; background:#0C0A0B; color:#fff; overflow-x:hidden;">
 
   <!-- ===================== NAV ===================== -->
-  <nav style="position:sticky; top:0; z-index:50; background:rgba(255,255,255,.82); backdrop-filter:blur(14px); border-bottom:1px solid #F0EAE4;">
-    <div style="max-width:1280px; margin:0 auto; padding:0 clamp(20px,5vw,56px); height:74px; display:flex; align-items:center; gap:14px;">
+  <nav style="position:sticky; top:0; z-index:60; background:rgba(12,10,11,.72); backdrop-filter:blur(18px); border-bottom:1px solid rgba(255,255,255,.07);">
+    <div style="max-width:1280px; margin:0 auto; padding:0 clamp(20px,5vw,56px); height:74px; display:flex; align-items:center; gap:16px;">
       <a href="MartX Platform.dc.html" style="display:flex; align-items:center; gap:11px;">
-        <img src="assets/martx-logo.png" alt="MartX" style="width:38px; height:38px; object-fit:contain; display:block;" />
-        <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:23px; letter-spacing:-.02em; color:#181210;">MartX</span>
+        <img src="assets/martx-logo.png" alt="MartX" style="width:36px; height:36px; object-fit:contain;" />
+        <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:23px; letter-spacing:-.02em;">Mart<span style="color:#FF4A17;">X</span></span>
       </a>
-      <div class="mx-nav-links" style="display:flex; align-items:center; gap:30px; margin:0 auto; font-weight:500; font-size:15px; color:#56504B;">
-        <a href="MartX App.dc.html#explore" style="cursor:pointer; color:#56504B;" style-hover="color:#181210;">Marketplace</a>
-        <a href="MartX App.dc.html#explore" style="cursor:pointer; color:#56504B;" style-hover="color:#181210;">Live Shopping</a>
-        <a href="MartX App.dc.html#dashboard" style="cursor:pointer; color:#56504B;" style-hover="color:#181210;">For Vendors</a>
-        <a href="MartX App.dc.html#wallet" style="cursor:pointer; color:#56504B;" style-hover="color:#181210;">Wallet</a>
+      <div class="mx-nav-links" style="display:flex; align-items:center; gap:30px; margin:0 auto; font-weight:500; font-size:15px; color:#A89E98;">
+        <a href="MartX App.dc.html#explore" style="color:#A89E98;" style-hover="color:#fff;">Marketplace</a>
+        <a href="MartX App.dc.html#explore" style="color:#A89E98;" style-hover="color:#fff;">Live Shopping</a>
+        <a href="MartX App.dc.html#dashboard" style="color:#A89E98;" style-hover="color:#fff;">For Vendors</a>
+        <a href="MartX App.dc.html#wallet" style="color:#A89E98;" style-hover="color:#fff;">Wallet</a>
       </div>
-      <div style="display:flex; align-items:center; gap:12px;">
-        <a href="MartX App.dc.html#dashboard" class="mx-nav-signin" style="cursor:pointer; font-weight:600; font-size:15px; color:#181210;">Sign in</a>
-        <a href="MartX App.dc.html#dashboard" style="cursor:pointer; font-weight:700; font-size:15px; color:#fff; background:#FF4A17; padding:11px 20px; border-radius:12px;" style-hover="background:#E63E0C;">Start selling</a>
+      <div style="display:flex; align-items:center; gap:14px;">
+        <a href="MartX App.dc.html#dashboard" class="mx-nav-secondary" style="font-weight:600; font-size:15px; color:#fff;">Sign in</a>
+        <a href="MartX App.dc.html#dashboard" style="font-weight:700; font-size:15px; color:#fff; background:linear-gradient(120deg,#FF6A2B,#FF2E7E); padding:11px 20px; border-radius:13px; box-shadow:0 10px 30px -10px rgba(255,46,126,.55);" style-hover="filter:brightness(1.07);">Start selling</a>
       </div>
     </div>
   </nav>
 
   <!-- ===================== HERO ===================== -->
-  <section style="max-width:1280px; margin:0 auto; padding:clamp(48px,7vw,92px) clamp(20px,5vw,56px) clamp(40px,5vw,64px); display:flex; flex-wrap:wrap; gap:56px; align-items:center;">
-    <div style="flex:1 1 420px; min-width:300px;">
-      <div style="display:inline-flex; align-items:center; gap:9px; padding:7px 14px 7px 9px; border:1px solid #F0D9CC; background:#FFF3EC; border-radius:999px; font-size:13px; font-weight:600; color:#C9461B; margin-bottom:26px;">
-        <span style="display:flex; align-items:center; gap:6px; background:#fff; padding:3px 9px; border-radius:999px;"><span style="width:7px;height:7px;border-radius:50%;background:#FF4A17;display:inline-block;animation:mx-pulse 1.4s infinite;"></span>LIVE</span>
-        Social commerce, built for Africa
+  <section style="position:relative; overflow:hidden;">
+    <div style="position:absolute; inset:0; background:radial-gradient(900px 620px at 12% -8%, rgba(255,74,23,.32), transparent 60%), radial-gradient(760px 560px at 96% 4%, rgba(255,46,126,.26), transparent 58%), radial-gradient(680px 600px at 64% 96%, rgba(155,108,255,.18), transparent 60%); pointer-events:none;"></div>
+    <div style="position:absolute; inset:0; opacity:.5; pointer-events:none; background-image:radial-gradient(rgba(255,255,255,.045) 1px, transparent 1px); background-size:42px 42px; -webkit-mask-image:radial-gradient(700px 600px at 50% 20%, #000, transparent 75%);"></div>
+
+    <div style="position:relative; max-width:1280px; margin:0 auto; padding:clamp(44px,6vw,84px) clamp(20px,5vw,56px) clamp(56px,7vw,96px); display:flex; flex-wrap:wrap; gap:48px; align-items:center;">
+      <div style="flex:1 1 460px; min-width:300px;">
+        <div style="display:inline-flex; align-items:center; gap:9px; padding:7px 15px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04); border-radius:999px; font-size:13px; font-weight:600; color:#FFC0A6; margin-bottom:28px;">
+          <span style="width:7px; height:7px; border-radius:50%; background:#FF2E7E; display:inline-block; animation:mx-pulse 1.4s infinite;"></span>
+          Africa's live-commerce marketplace
+        </div>
+        <h1 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(44px,6.6vw,86px); line-height:.94; letter-spacing:-.035em; margin:0 0 26px;">
+          Go <span style="background:linear-gradient(120deg,#FF6A2B,#FF2E7E); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;">live.</span><br>
+          Sell to the<br>
+          whole <span style="background:linear-gradient(120deg,#FFB020,#FF4A17); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;">world.</span>
+        </h1>
+        <p style="font-size:clamp(17px,1.5vw,20px); line-height:1.55; color:#B0A69F; max-width:500px; margin:0 0 36px;">
+          The live-shopping marketplace where African vendors and creators source 50,000+ products, stream to every social feed at once, and get paid in Naira or crypto — Lagos to London.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:14px; margin-bottom:40px;">
+          <a href="MartX App.dc.html#dashboard" style="display:flex; align-items:center; gap:9px; font-weight:700; font-size:16px; color:#fff; background:linear-gradient(120deg,#FF6A2B,#FF2E7E); padding:16px 30px; border-radius:15px; box-shadow:0 16px 44px -12px rgba(255,46,126,.6), 0 6px 18px -8px rgba(255,74,23,.5);" style-hover="filter:brightness(1.08); transform:translateY(-2px);">Start selling free →</a>
+          <a href="MartX App.dc.html#explore" style="display:flex; align-items:center; gap:10px; font-weight:700; font-size:16px; color:#fff; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); padding:16px 28px; border-radius:15px; backdrop-filter:blur(8px);" style-hover="background:rgba(255,255,255,.12);"><span style="width:24px; height:24px; border-radius:50%; background:#fff; color:#0C0A0B; display:flex; align-items:center; justify-content:center; font-size:10px;">▶</span>Watch it live</a>
+        </div>
+        <div style="display:flex; align-items:center; gap:16px;">
+          <div style="display:flex;">
+            <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=80&q=80&auto=format&fit=crop" style="width:38px; height:38px; border-radius:50%; object-fit:cover; border:2px solid #0C0A0B;" />
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=80&q=80&auto=format&fit=crop" style="width:38px; height:38px; border-radius:50%; object-fit:cover; border:2px solid #0C0A0B; margin-left:-12px;" />
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80&auto=format&fit=crop" style="width:38px; height:38px; border-radius:50%; object-fit:cover; border:2px solid #0C0A0B; margin-left:-12px;" />
+            <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?w=80&q=80&auto=format&fit=crop" style="width:38px; height:38px; border-radius:50%; object-fit:cover; border:2px solid #0C0A0B; margin-left:-12px;" />
+          </div>
+          <div>
+            <div style="font-size:14.5px; font-weight:600; color:#EDE7E2;">12,000+ vendors & creators selling live</div>
+            <div style="font-size:13px; color:#8A817B;"><span style="color:#FFB020;">★★★★★</span> &nbsp;4.9 average seller rating</div>
+          </div>
+        </div>
       </div>
-      <h1 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(40px,6vw,72px); line-height:.98; letter-spacing:-.03em; margin:0 0 22px;">
-        The live shopping<br>marketplace for<br><span style="color:#FF4A17;">all of Africa.</span>
-      </h1>
-      <p style="font-size:clamp(17px,1.6vw,20px); line-height:1.5; color:#6B635E; max-width:480px; margin:0 0 34px;">
-        Vendors sell, creators go live, and shoppers buy — all in one place. Source 50,000+ products globally, stream to every social feed at once, and reach buyers from Lagos to London.
-      </p>
-      <div style="display:flex; flex-wrap:wrap; gap:13px; margin-bottom:38px;">
-        <a href="MartX App.dc.html#dashboard" style="cursor:pointer; font-weight:700; font-size:16px; color:#fff; background:#FF4A17; padding:15px 28px; border-radius:14px; box-shadow:0 10px 28px -10px rgba(255,74,23,.6);" style-hover="background:#E63E0C;">Open your store</a>
-        <a href="MartX App.dc.html#explore" style="cursor:pointer; font-weight:700; font-size:16px; color:#181210; background:#fff; border:1.5px solid #E7E1DB; padding:15px 28px; border-radius:14px;" style-hover="border-color:#181210;">▶  Watch a live drop</a>
-      </div>
-      <div style="display:flex; gap:34px; flex-wrap:wrap;">
-        <div><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:30px; letter-spacing:-.02em;">50K+</div><div style="font-size:13.5px; color:#8A827C; font-weight:500;">Products sourced</div></div>
-        <div style="width:1px; background:#EDE7E1;"></div>
-        <div><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:30px; letter-spacing:-.02em;">150+</div><div style="font-size:13.5px; color:#8A827C; font-weight:500;">Global suppliers</div></div>
-        <div style="width:1px; background:#EDE7E1;"></div>
-        <div><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:30px; letter-spacing:-.02em;">4&nbsp;feeds</div><div style="font-size:13.5px; color:#8A827C; font-weight:500;">One broadcast, everywhere</div></div>
-      </div>
-    </div>
 
-    <!-- PHONE — live shopping feed -->
-    <div style="flex:1 1 300px; min-width:0; display:flex; justify-content:center;">
-      <div style="position:relative; width:min(312px,82vw); aspect-ratio:312/640; background:#181210; border-radius:46px; padding:11px; box-shadow:0 40px 80px -30px rgba(24,18,16,.55), 0 0 0 1px rgba(0,0,0,.05);">
-        <div style="position:absolute; top:24px; left:50%; transform:translateX(-50%); width:104px; height:26px; background:#181210; border-radius:0 0 16px 16px; z-index:6;"></div>
-        <div style="position:relative; width:100%; height:100%; border-radius:36px; overflow:hidden; background:#2A2320;">
-          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=800&q=80&auto=format&fit=crop" alt="Live creator" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
-          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(24,18,16,.42) 0%, rgba(24,18,16,0) 26%, rgba(24,18,16,0) 52%, rgba(24,18,16,.78) 100%); pointer-events:none;"></div>
-
-          <!-- top bar -->
-          <div style="position:absolute; top:0; left:0; right:0; padding:22px 16px 0; display:flex; align-items:center; gap:9px; z-index:4;">
-            <div style="display:flex; align-items:center; gap:8px; background:rgba(0,0,0,.32); backdrop-filter:blur(8px); padding:4px 4px 4px 4px; border-radius:999px;">
-              <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#FF4A17,#FF9248);"></div>
-              <span style="color:#fff; font-weight:700; font-size:13px;">@zuri.live</span>
-              <span style="background:#FF4A17; color:#fff; font-weight:800; font-size:10px; padding:4px 9px; border-radius:999px;">FOLLOW</span>
+      <!-- HERO VISUAL CLUSTER -->
+      <div style="flex:1 1 420px; min-width:300px; position:relative; display:flex; justify-content:center; align-items:center; min-height:clamp(520px,68vw,640px);">
+        <div style="position:absolute; width:80%; height:80%; background:radial-gradient(circle, rgba(255,46,126,.4), transparent 65%); filter:blur(50px); animation:mx-glow 5s ease-in-out infinite;"></div>
+        <!-- phone -->
+        <div style="position:relative; width:min(300px,78vw); aspect-ratio:300/620; background:#080607; border-radius:44px; padding:10px; box-shadow:0 50px 100px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.08); z-index:2;">
+          <div style="position:relative; width:100%; height:100%; border-radius:36px; overflow:hidden; background:#1A1416;">
+            <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=800&q=80&auto=format&fit=crop" alt="Live creator" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+            <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,6,7,.5) 0%, transparent 24%, transparent 54%, rgba(8,6,7,.82) 100%);"></div>
+            <div style="position:absolute; top:18px; left:14px; right:14px; display:flex; align-items:center; gap:8px;">
+              <div style="display:flex; align-items:center; gap:6px; background:rgba(0,0,0,.4); backdrop-filter:blur(8px); padding:4px 4px 4px 4px; border-radius:999px;">
+                <div style="width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg,#FF6A2B,#FF2E7E);"></div>
+                <span style="color:#fff; font-weight:700; font-size:12px;">@zuri.live</span>
+              </div>
+              <div style="margin-left:auto; display:flex; align-items:center; gap:5px; background:#FF1F4B; padding:4px 9px; border-radius:7px;"><span style="width:6px; height:6px; border-radius:50%; background:#fff; animation:mx-pulse 1.3s infinite;"></span><span style="color:#fff; font-weight:800; font-size:10px;">LIVE</span></div>
             </div>
-            <div style="margin-left:auto; display:flex; align-items:center; gap:5px; background:#FF1F1F; padding:5px 9px; border-radius:8px;">
-              <span style="width:6px;height:6px;border-radius:50%;background:#fff;display:inline-block;animation:mx-pulse 1.3s infinite;"></span>
-              <span style="color:#fff; font-weight:800; font-size:11px;">LIVE</span>
+            <div style="position:absolute; left:12px; right:12px; bottom:62px; display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.96); padding:8px; border-radius:15px; box-shadow:0 12px 28px -8px rgba(0,0,0,.5);">
+              <div style="width:44px; height:44px; border-radius:11px; background:linear-gradient(135deg,#B23E12,#FF7A3C); flex:none;"></div>
+              <div style="min-width:0;"><div style="font-weight:700; font-size:12.5px; color:#181210; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Beaded Crown Set</div><div style="font-weight:800; font-size:14px; color:#FF2E7E;">₦12,800</div></div>
+              <span style="margin-left:auto; flex:none; background:linear-gradient(120deg,#FF6A2B,#FF2E7E); color:#fff; font-weight:800; font-size:11px; padding:8px 12px; border-radius:10px;">Buy</span>
             </div>
-            <div style="background:rgba(0,0,0,.32); backdrop-filter:blur(8px); color:#fff; font-weight:700; font-size:11px; padding:6px 9px; border-radius:8px;">👁 2.4K</div>
-          </div>
-
-          <!-- floating hearts -->
-          <div style="position:absolute; right:18px; bottom:150px; width:30px; height:200px; z-index:3; pointer-events:none;">
-            <span style="position:absolute; bottom:0; left:2px; color:#FF6B6B; font-size:20px; animation:mx-float 3.2s infinite;">♥</span>
-            <span style="position:absolute; bottom:0; left:10px; color:#FF4A17; font-size:16px; animation:mx-float 2.6s infinite .8s;">♥</span>
-            <span style="position:absolute; bottom:0; left:0; color:#FFB066; font-size:22px; animation:mx-float 3.6s infinite 1.4s;">♥</span>
-          </div>
-
-          <!-- pinned product -->
-          <div style="position:absolute; left:14px; right:14px; bottom:128px; display:flex; align-items:center; gap:11px; background:rgba(255,255,255,.96); backdrop-filter:blur(6px); padding:9px; border-radius:16px; z-index:4; box-shadow:0 10px 24px -8px rgba(0,0,0,.4);">
-            <div style="width:50px;height:50px;border-radius:11px;background:linear-gradient(135deg,#B23E12,#FF7A3C); flex:none;"></div>
-            <div style="min-width:0;">
-              <div style="font-weight:700; font-size:13px; color:#181210; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Beaded Statement Set</div>
-              <div style="display:flex; align-items:center; gap:7px;"><span style="font-weight:800; font-size:15px; color:#FF4A17;">₦12,800</span><span style="font-size:11px; color:#9B938D; text-decoration:line-through;">₦18,000</span></div>
-            </div>
-            <span style="margin-left:auto; flex:none; background:#FF4A17; color:#fff; font-weight:800; font-size:12px; padding:9px 14px; border-radius:11px;">Buy</span>
-          </div>
-
-          <!-- comments + gift -->
-          <div style="position:absolute; left:14px; right:14px; bottom:18px; z-index:4;">
-            <div style="display:flex; flex-direction:column; gap:7px; margin-bottom:11px;">
-              <div style="font-size:12px; color:#fff;"><b style="color:#FFCBAE;">@ada_n</b> &nbsp;is this still available? 😍</div>
-              <div style="font-size:12px; color:#fff;"><b style="color:#FFCBAE;">@kofi.shops</b> &nbsp;just bought 2! 🔥</div>
-            </div>
-            <div style="display:flex; align-items:center; gap:8px;">
-              <div style="flex:1; background:rgba(255,255,255,.16); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.25); color:rgba(255,255,255,.7); font-size:12px; padding:11px 14px; border-radius:999px;">Say something…</div>
-              <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#FF4A17,#FF9248); display:flex; align-items:center; justify-content:center; font-size:18px;">🎁</div>
+            <div style="position:absolute; left:12px; right:12px; bottom:14px; display:flex; align-items:center; gap:8px;">
+              <div style="flex:1; background:rgba(255,255,255,.14); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.22); color:rgba(255,255,255,.72); font-size:11px; padding:9px 13px; border-radius:999px;">Say something…</div>
+              <div style="width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#FFB020,#FF4A17); display:flex; align-items:center; justify-content:center; font-size:16px;">🎁</div>
             </div>
           </div>
+        </div>
+        <!-- floating: multistream -->
+        <div style="position:absolute; top:5%; right:0; z-index:3; background:rgba(20,16,18,.7); border:1px solid rgba(255,255,255,.12); backdrop-filter:blur(14px); border-radius:18px; padding:14px 16px; box-shadow:0 20px 50px -20px rgba(0,0,0,.7); animation:mx-float 5.5s ease-in-out infinite;">
+          <div style="font-size:11px; font-weight:700; letter-spacing:.08em; color:#9A8F88; text-transform:uppercase; margin-bottom:10px;">Streaming to</div>
+          <div style="display:flex; gap:7px;">
+            <span style="width:30px; height:30px; border-radius:9px; background:rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:11px; color:#fff;">X</span>
+            <span style="width:30px; height:30px; border-radius:9px; background:rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:10px; color:#fff;">IG</span>
+            <span style="width:30px; height:30px; border-radius:9px; background:rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12px; color:#fff;">f</span>
+            <span style="width:30px; height:30px; border-radius:9px; background:rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:10px; color:#fff;">YT</span>
+          </div>
+        </div>
+        <!-- floating: earnings -->
+        <div class="mx-float-extra" style="position:absolute; bottom:9%; left:0; z-index:3; display:flex; align-items:center; gap:11px; background:rgba(20,16,18,.7); border:1px solid rgba(255,255,255,.12); backdrop-filter:blur(14px); border-radius:16px; padding:13px 16px; box-shadow:0 20px 50px -20px rgba(0,0,0,.7); animation:mx-float2 6s ease-in-out infinite;">
+          <div style="width:38px; height:38px; border-radius:11px; background:linear-gradient(135deg,#38E08A,#1FA968); display:flex; align-items:center; justify-content:center; font-size:18px;">💸</div>
+          <div><div style="font-size:12px; color:#9A8F88;">Sale just now</div><div style="font-weight:800; font-size:16px; color:#fff;">+₦18,500</div></div>
+        </div>
+        <!-- floating: viewers -->
+        <div class="mx-float-extra" style="position:absolute; top:42%; left:-6%; z-index:3; display:flex; align-items:center; gap:8px; background:rgba(20,16,18,.7); border:1px solid rgba(255,255,255,.12); backdrop-filter:blur(14px); border-radius:999px; padding:9px 15px; box-shadow:0 16px 40px -18px rgba(0,0,0,.7); animation:mx-float 6.5s ease-in-out infinite 1s;">
+          <span style="font-size:15px;">👁</span><span style="font-weight:800; font-size:14px; color:#fff;">2,418</span><span style="font-size:12px; color:#9A8F88;">watching</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== MULTISTREAM STRIP ===================== -->
-  <section style="background:#FFF6F1; border-top:1px solid #F4E7DD; border-bottom:1px solid #F4E7DD;">
-    <div style="max-width:1280px; margin:0 auto; padding:clamp(56px,7vw,96px) clamp(20px,5vw,56px); display:flex; flex-wrap:wrap; gap:56px; align-items:center;">
+  <!-- ===================== MARQUEE (broadcast) ===================== -->
+  <div style="border-top:1px solid rgba(255,255,255,.07); border-bottom:1px solid rgba(255,255,255,.07); background:rgba(255,255,255,.015); overflow:hidden; padding:20px 0;">
+    <div style="-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);">
+      <div style="display:flex; align-items:center; gap:46px; width:max-content; animation:mx-marq 30s linear infinite;">
+        <span style="display:flex; align-items:center; gap:46px; font-family:'Bricolage Grotesque',sans-serif; font-weight:600; font-size:clamp(18px,2.2vw,26px); color:#6E655F; white-space:nowrap;">
+          <span>One stream, every feed</span><span style="color:#FF4A17;">✦</span><span style="color:#EDE7E2;">X</span><span style="color:#FF2E7E;">✦</span><span style="color:#EDE7E2;">Instagram</span><span style="color:#FFB020;">✦</span><span style="color:#EDE7E2;">Facebook</span><span style="color:#9B6CFF;">✦</span><span style="color:#EDE7E2;">YouTube</span><span style="color:#FF4A17;">✦</span><span style="color:#EDE7E2;">TikTok</span><span style="color:#FF2E7E;">✦</span>
+        </span>
+        <span style="display:flex; align-items:center; gap:46px; font-family:'Bricolage Grotesque',sans-serif; font-weight:600; font-size:clamp(18px,2.2vw,26px); color:#6E655F; white-space:nowrap;">
+          <span>One stream, every feed</span><span style="color:#FF4A17;">✦</span><span style="color:#EDE7E2;">X</span><span style="color:#FF2E7E;">✦</span><span style="color:#EDE7E2;">Instagram</span><span style="color:#FFB020;">✦</span><span style="color:#EDE7E2;">Facebook</span><span style="color:#9B6CFF;">✦</span><span style="color:#EDE7E2;">YouTube</span><span style="color:#FF4A17;">✦</span><span style="color:#EDE7E2;">TikTok</span><span style="color:#FF2E7E;">✦</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== STATS ===================== -->
+  <section class="reveal" style="max-width:1280px; margin:0 auto; padding:clamp(56px,7vw,96px) clamp(20px,5vw,56px);">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:24px;">
+      <div style="text-align:center;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(40px,5vw,60px); letter-spacing:-.03em; background:linear-gradient(120deg,#FF6A2B,#FF2E7E); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;">{{ statProducts }}+</div>
+        <div style="font-size:14.5px; color:#8A817B; font-weight:500; margin-top:6px;">Products to source</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(40px,5vw,60px); letter-spacing:-.03em; background:linear-gradient(120deg,#FFB020,#FF4A17); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;">{{ statSuppliers }}+</div>
+        <div style="font-size:14.5px; color:#8A817B; font-weight:500; margin-top:6px;">Global suppliers</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(40px,5vw,60px); letter-spacing:-.03em; background:linear-gradient(120deg,#9B6CFF,#FF2E7E); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;">{{ statCreators }}+</div>
+        <div style="font-size:14.5px; color:#8A817B; font-weight:500; margin-top:6px;">Vendors & creators</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(40px,5vw,60px); letter-spacing:-.03em; background:linear-gradient(120deg,#FF4A17,#FFB020); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;">4</div>
+        <div style="font-size:14.5px; color:#8A817B; font-weight:500; margin-top:6px;">Feeds, one broadcast</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BENTO (the model) ===================== -->
+  <section style="max-width:1280px; margin:0 auto; padding:clamp(40px,5vw,72px) clamp(20px,5vw,56px) clamp(72px,9vw,120px);">
+    <div class="reveal" style="max-width:720px; margin-bottom:clamp(36px,4vw,56px);">
+      <div style="font-weight:700; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:#FF6A2B; margin-bottom:16px;">The MartX model</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(32px,4.6vw,56px); line-height:1.0; letter-spacing:-.03em; margin:0;">Alibaba × TikTok Shop × Shopify — <span style="background:linear-gradient(120deg,#FF6A2B,#FF2E7E); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;">rebuilt for Africa.</span></h2>
+    </div>
+
+    <div class="mx-bento reveal" style="display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:minmax(186px,auto); gap:18px;">
+      <!-- featured -->
+      <div class="mx-bento-feature" style="grid-column:span 2; grid-row:span 2; position:relative; border-radius:26px; overflow:hidden; border:1px solid rgba(255,255,255,.1);">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1100&q=80&auto=format&fit=crop" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+        <div style="position:absolute; inset:0; background:linear-gradient(160deg, rgba(12,10,11,.2), rgba(12,10,11,.55) 50%, rgba(12,10,11,.92));"></div>
+        <div style="position:absolute; top:20px; left:20px; display:flex; align-items:center; gap:6px; background:#FF1F4B; padding:6px 12px; border-radius:8px;"><span style="width:6px; height:6px; border-radius:50%; background:#fff; animation:mx-pulse 1.3s infinite;"></span><span style="color:#fff; font-weight:800; font-size:11px;">LIVE NOW</span></div>
+        <div style="position:absolute; left:0; right:0; bottom:0; padding:clamp(22px,3vw,34px);">
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:clamp(24px,2.6vw,34px); letter-spacing:-.02em; margin:0 0 10px;">Live shopping that actually sells</h3>
+          <p style="font-size:15.5px; line-height:1.55; color:#CFC6BF; max-width:440px; margin:0;">Creators demo products, drop prices in real time, and close sales on stream — while you simulcast to every social feed at once.</p>
+        </div>
+      </div>
+      <!-- sourcing -->
+      <div style="border:1px solid rgba(255,255,255,.09); background:rgba(255,255,255,.035); border-radius:24px; padding:26px; transition:all .25s ease;" style-hover="transform:translateY(-5px); border-color:rgba(255,106,43,.4);">
+        <div style="width:48px; height:48px; border-radius:14px; background:linear-gradient(135deg,rgba(255,106,43,.25),rgba(255,46,126,.25)); display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:18px;">🌍</div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:19px; margin:0 0 8px;">Source globally</h3>
+        <p style="font-size:14px; line-height:1.5; color:#9A8F88; margin:0;">50,000+ products from 150+ suppliers across Asia, Europe & America — dropship with zero inventory.</p>
+      </div>
+      <!-- multistream -->
+      <div style="border:1px solid rgba(255,255,255,.09); background:rgba(255,255,255,.035); border-radius:24px; padding:26px; transition:all .25s ease;" style-hover="transform:translateY(-5px); border-color:rgba(255,46,126,.4);">
+        <div style="width:48px; height:48px; border-radius:14px; background:linear-gradient(135deg,rgba(255,46,126,.25),rgba(155,108,255,.25)); display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:18px;">📡</div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:19px; margin:0 0 8px;">Multi-broadcast</h3>
+        <p style="font-size:14px; line-height:1.5; color:#9A8F88; margin:0;">One tap goes live on X, Instagram, Facebook & YouTube via RTMP — automatically.</p>
+      </div>
+      <!-- storefront -->
+      <div style="border:1px solid rgba(255,255,255,.09); background:rgba(255,255,255,.035); border-radius:24px; padding:26px; transition:all .25s ease;" style-hover="transform:translateY(-5px); border-color:rgba(255,176,32,.4);">
+        <div style="width:48px; height:48px; border-radius:14px; background:linear-gradient(135deg,rgba(255,176,32,.25),rgba(255,74,23,.25)); display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:18px;">🏪</div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:19px; margin:0 0 8px;">Your own storefront</h3>
+        <p style="font-size:14px; line-height:1.5; color:#9A8F88; margin:0;">Branded store, orders, customers & payouts — approved and live in minutes.</p>
+      </div>
+      <!-- wallet -->
+      <div style="border:1px solid rgba(255,255,255,.09); background:rgba(255,255,255,.035); border-radius:24px; padding:26px; transition:all .25s ease;" style-hover="transform:translateY(-5px); border-color:rgba(56,224,138,.4);">
+        <div style="width:48px; height:48px; border-radius:14px; background:linear-gradient(135deg,rgba(56,224,138,.25),rgba(31,169,104,.25)); display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:18px;">💳</div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:19px; margin:0 0 8px;">Naira & crypto wallet</h3>
+        <p style="font-size:14px; line-height:1.5; color:#9A8F88; margin:0;">Fund, gift creators, cash out in USDT — payments built for the diaspora.</p>
+      </div>
+      <!-- escrow -->
+      <div style="border:1px solid rgba(255,255,255,.09); background:rgba(255,255,255,.035); border-radius:24px; padding:26px; transition:all .25s ease;" style-hover="transform:translateY(-5px); border-color:rgba(96,165,250,.4);">
+        <div style="width:48px; height:48px; border-radius:14px; background:linear-gradient(135deg,rgba(96,165,250,.25),rgba(155,108,255,.25)); display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:18px;">🛡️</div>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:19px; margin:0 0 8px;">Escrow protection</h3>
+        <p style="font-size:14px; line-height:1.5; color:#9A8F88; margin:0;">Every payment held safely until delivery is confirmed. Buyers and sellers covered.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LIVE COMMERCE (interactive) ===================== -->
+  <section style="position:relative; overflow:hidden; border-top:1px solid rgba(255,255,255,.06);">
+    <div style="position:absolute; inset:0; background:radial-gradient(700px 500px at 85% 30%, rgba(255,46,126,.16), transparent 60%); pointer-events:none;"></div>
+    <div class="reveal" style="position:relative; max-width:1280px; margin:0 auto; padding:clamp(72px,9vw,120px) clamp(20px,5vw,56px); display:flex; flex-wrap:wrap; gap:52px; align-items:center;">
       <div style="flex:1 1 380px; min-width:300px;">
-        <div style="font-weight:700; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#FF4A17; margin-bottom:16px;">Live multi-broadcast</div>
-        <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(30px,4vw,48px); line-height:1.02; letter-spacing:-.025em; margin:0 0 18px;">Go live once.<br>Broadcast everywhere.</h2>
-        <p style="font-size:17px; line-height:1.55; color:#6B635E; max-width:440px; margin:0 0 28px;">When a creator goes live on MartX, we simulcast the stream to X, Instagram, Facebook and YouTube over RTMP — automatically. One tap reaches every audience your creators have built.</p>
+        <div style="font-weight:700; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:#FF6A2B; margin-bottom:16px;">Live multi-broadcast</div>
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(30px,4.2vw,50px); line-height:1.0; letter-spacing:-.03em; margin:0 0 18px;">Go live once.<br>Broadcast <span style="background:linear-gradient(120deg,#FF6A2B,#FF2E7E); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;">everywhere.</span></h2>
+        <p style="font-size:17px; line-height:1.55; color:#A89E98; max-width:440px; margin:0 0 28px;">When a creator goes live on MartX, we simulcast over RTMP to every platform they've built an audience on. Tap a feed to toggle it — the stream stays live on the rest.</p>
         <div style="display:flex; flex-wrap:wrap; gap:11px; max-width:440px;">
           <sc-for list="{{ platformList }}" as="p" hint-placeholder-count="4">
             <div style="{{ p.chipStyle }}" onClick="{{ p.onClick }}">
@@ -145,260 +250,177 @@
             </div>
           </sc-for>
         </div>
-        <div style="margin-top:20px; font-size:14px; color:#8A827C; font-weight:500;">Tap a platform to toggle its feed — your stream stays live on the rest.</div>
       </div>
-
-      <!-- studio card -->
       <div style="flex:1 1 420px; min-width:300px;">
-        <div style="background:#181210; border-radius:24px; padding:18px; box-shadow:0 30px 70px -30px rgba(24,18,16,.5);">
+        <div style="background:rgba(20,16,18,.6); border:1px solid rgba(255,255,255,.1); border-radius:24px; padding:18px; backdrop-filter:blur(12px); box-shadow:0 30px 80px -30px rgba(0,0,0,.7);">
           <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
-            <div style="display:flex; align-items:center; gap:7px; background:#FF1F1F; padding:6px 11px; border-radius:8px;"><span style="width:7px;height:7px;border-radius:50%;background:#fff;display:inline-block;animation:mx-pulse 1.3s infinite;"></span><span style="color:#fff;font-weight:800;font-size:12px;">ON AIR</span></div>
-            <span style="color:#fff; font-weight:600; font-size:14px;">Creator Studio</span>
-            <span style="margin-left:auto; color:#22C55E; font-weight:700; font-size:13px;">● Broadcasting to {{ liveCount }}</span>
+            <div style="display:flex; align-items:center; gap:7px; background:#FF1F4B; padding:6px 11px; border-radius:8px;"><span style="width:7px; height:7px; border-radius:50%; background:#fff; animation:mx-pulse 1.3s infinite;"></span><span style="color:#fff; font-weight:800; font-size:12px;">ON AIR</span></div>
+            <span style="color:#EDE7E2; font-weight:600; font-size:14px;">Creator Studio</span>
+            <span style="margin-left:auto; color:#38E08A; font-weight:700; font-size:13px;">● Live on {{ liveCount }}</span>
           </div>
-          <div style="position:relative; aspect-ratio:16/10; border-radius:16px; overflow:hidden; background:#2A2320;">
-            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&q=80&auto=format&fit=crop" alt="Stream preview" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
-            <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(24,18,16,.3),rgba(24,18,16,0) 40%,rgba(24,18,16,.6));"></div>
+          <div style="position:relative; aspect-ratio:16/10; border-radius:16px; overflow:hidden; background:#1A1416;">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&q=80&auto=format&fit=crop" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+            <div style="position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,6,7,.3),transparent 40%,rgba(8,6,7,.7));"></div>
             <div style="position:absolute; top:12px; left:12px; display:flex; gap:7px;">
               <sc-for list="{{ platformList }}" as="p" hint-placeholder-count="4">
                 <sc-if value="{{ p.on }}" hint-placeholder-val="{{ true }}">
-                  <span style="width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:11px;">{{ p.label }}</span>
+                  <span style="width:28px; height:28px; border-radius:8px; background:rgba(255,255,255,.16); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:11px;">{{ p.label }}</span>
                 </sc-if>
               </sc-for>
             </div>
             <div style="position:absolute; bottom:12px; left:12px; right:12px; display:flex; align-items:center; gap:9px;">
-              <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#FF4A17,#FF9248);"></div>
-              <div style="background:rgba(0,0,0,.4);backdrop-filter:blur(8px);color:#fff;font-size:12px;font-weight:600;padding:7px 11px;border-radius:10px;">Showcasing: Ankara Wrap Dress · ₦18,500</div>
+              <div style="width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#FF6A2B,#FF2E7E);"></div>
+              <div style="background:rgba(0,0,0,.45); backdrop-filter:blur(8px); color:#fff; font-size:12px; font-weight:600; padding:7px 11px; border-radius:10px;">Showcasing: Ankara Wrap Dress · ₦18,500</div>
             </div>
           </div>
           <div style="display:flex; gap:10px; margin-top:14px;">
-            <div style="flex:1; background:#26201C; border-radius:12px; padding:11px 14px;"><div style="color:#8A827C; font-size:11px; font-weight:600;">VIEWERS</div><div style="color:#fff; font-weight:800; font-size:18px; font-family:'Bricolage Grotesque',sans-serif;">2,418</div></div>
-            <div style="flex:1; background:#26201C; border-radius:12px; padding:11px 14px;"><div style="color:#8A827C; font-size:11px; font-weight:600;">SALES</div><div style="color:#fff; font-weight:800; font-size:18px; font-family:'Bricolage Grotesque',sans-serif;">₦164K</div></div>
-            <div style="flex:1; background:#FF4A17; border-radius:12px; padding:11px 14px;"><div style="color:rgba(255,255,255,.7); font-size:11px; font-weight:600;">GIFTS</div><div style="color:#fff; font-weight:800; font-size:18px; font-family:'Bricolage Grotesque',sans-serif;">38.2K</div></div>
+            <div style="flex:1; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); border-radius:12px; padding:11px 14px;"><div style="color:#8A817B; font-size:11px; font-weight:600;">VIEWERS</div><div style="color:#fff; font-weight:800; font-size:18px; font-family:'Bricolage Grotesque',sans-serif;">2,418</div></div>
+            <div style="flex:1; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); border-radius:12px; padding:11px 14px;"><div style="color:#8A817B; font-size:11px; font-weight:600;">SALES</div><div style="color:#fff; font-weight:800; font-size:18px; font-family:'Bricolage Grotesque',sans-serif;">₦164K</div></div>
+            <div style="flex:1; background:linear-gradient(135deg,#FF6A2B,#FF2E7E); border-radius:12px; padding:11px 14px;"><div style="color:rgba(255,255,255,.8); font-size:11px; font-weight:600;">GIFTS</div><div style="color:#fff; font-weight:800; font-size:18px; font-family:'Bricolage Grotesque',sans-serif;">38.2K</div></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== THE MODEL ===================== -->
-  <section style="max-width:1280px; margin:0 auto; padding:clamp(72px,9vw,128px) clamp(20px,5vw,56px);">
-    <div style="text-align:center; max-width:680px; margin:0 auto clamp(44px,5vw,64px);">
-      <div style="font-weight:700; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#FF4A17; margin-bottom:16px;">One platform, three engines</div>
-      <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(32px,4.4vw,54px); line-height:1.02; letter-spacing:-.03em; margin:0 0 16px;">Alibaba × TikTok Shop × Shopify — for Africa</h2>
-      <p style="font-size:18px; line-height:1.55; color:#6B635E; margin:0;">Global sourcing, live commerce, and seller storefronts in a single marketplace. Vendors focus on selling; MartX handles the infrastructure.</p>
+  <!-- ===================== MARKETPLACE MARQUEE ===================== -->
+  <section style="padding:clamp(72px,9vw,118px) 0; border-top:1px solid rgba(255,255,255,.06);">
+    <div class="reveal" style="max-width:1280px; margin:0 auto; padding:0 clamp(20px,5vw,56px) clamp(36px,4vw,52px); display:flex; flex-wrap:wrap; gap:20px; align-items:flex-end; justify-content:space-between;">
+      <div style="flex:1 1 360px;">
+        <div style="font-weight:700; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:#FF6A2B; margin-bottom:16px;">The marketplace</div>
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(30px,4.2vw,50px); line-height:1.0; letter-spacing:-.03em; margin:0;">As vibrant as<br>the continent.</h2>
+      </div>
+      <a href="MartX App.dc.html#explore" style="display:flex; align-items:center; gap:8px; font-weight:700; font-size:15px; color:#fff; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); padding:13px 22px; border-radius:13px;" style-hover="background:rgba(255,255,255,.12);">Browse the marketplace →</a>
     </div>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:22px;">
-      <div style="border:1px solid #EFE9E3; border-radius:22px; padding:32px; background:#fff;">
-        <div style="width:52px;height:52px;border-radius:15px;background:#FFF3EC;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:22px;">🌍</div>
-        <h3 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:22px; letter-spacing:-.02em; margin:0 0 11px;">Source like Alibaba</h3>
-        <p style="font-size:15.5px; line-height:1.55; color:#6B635E; margin:0;">Tap into 50,000+ products from 150+ vetted suppliers across Asia, Europe and America. Dropship with zero inventory.</p>
-      </div>
-      <div style="border:1px solid #EFE9E3; border-radius:22px; padding:32px; background:#181210; color:#fff;">
-        <div style="width:52px;height:52px;border-radius:15px;background:#26201C;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:22px;">🎥</div>
-        <h3 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:22px; letter-spacing:-.02em; margin:0 0 11px;">Sell like TikTok</h3>
-        <p style="font-size:15.5px; line-height:1.55; color:#C7BEB7; margin:0;">Creators go live, demo products and close sales in real time — simulcast to every social feed at once. Live commerce, the African way.</p>
-      </div>
-      <div style="border:1px solid #EFE9E3; border-radius:22px; padding:32px; background:#fff;">
-        <div style="width:52px;height:52px;border-radius:15px;background:#FFF3EC;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:22px;">🏪</div>
-        <h3 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:22px; letter-spacing:-.02em; margin:0 0 11px;">Run it like Shopify</h3>
-        <p style="font-size:15.5px; line-height:1.55; color:#6B635E; margin:0;">Every vendor gets a branded storefront, order management, customer tools and payouts — approved and ready in minutes.</p>
+    <div style="overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent); margin-bottom:18px;">
+      <div style="display:flex; gap:18px; width:max-content; animation:mx-marq 42s linear infinite;" style-hover="animationPlayState:paused;">
+        <sc-for list="{{ products }}" as="p" hint-placeholder-count="8">
+          <div style="flex:none; width:232px; background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.09); border-radius:18px; overflow:hidden;">
+            <div style="position:relative; aspect-ratio:4/5; background:#1A1416;"><div style="{{ p.thumbStyle }}"></div><sc-if value="{{ p.live }}" hint-placeholder-val="{{ true }}"><span style="position:absolute; top:11px; left:11px; display:flex; align-items:center; gap:5px; background:#FF1F4B; color:#fff; font-weight:800; font-size:10px; padding:5px 9px; border-radius:7px;"><span style="width:5px; height:5px; border-radius:50%; background:#fff; animation:mx-pulse 1.3s infinite;"></span>LIVE</span></sc-if></div>
+            <div style="padding:13px 14px 15px;"><div style="font-weight:700; font-size:14.5px; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ p.name }}</div><div style="font-size:12px; color:#8A817B; margin:3px 0 9px;">{{ p.vendor }}</div><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:17px; color:#FF6A2B;">{{ p.price }}</div></div>
+          </div>
+        </sc-for>
+        <sc-for list="{{ products }}" as="p" hint-placeholder-count="8">
+          <div style="flex:none; width:232px; background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.09); border-radius:18px; overflow:hidden;">
+            <div style="position:relative; aspect-ratio:4/5; background:#1A1416;"><div style="{{ p.thumbStyle }}"></div><sc-if value="{{ p.live }}" hint-placeholder-val="{{ true }}"><span style="position:absolute; top:11px; left:11px; display:flex; align-items:center; gap:5px; background:#FF1F4B; color:#fff; font-weight:800; font-size:10px; padding:5px 9px; border-radius:7px;"><span style="width:5px; height:5px; border-radius:50%; background:#fff; animation:mx-pulse 1.3s infinite;"></span>LIVE</span></sc-if></div>
+            <div style="padding:13px 14px 15px;"><div style="font-weight:700; font-size:14.5px; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ p.name }}</div><div style="font-size:12px; color:#8A817B; margin:3px 0 9px;">{{ p.vendor }}</div><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:17px; color:#FF6A2B;">{{ p.price }}</div></div>
+          </div>
+        </sc-for>
       </div>
     </div>
-  </section>
-
-  <!-- ===================== MARKETPLACE STOREFRONT ===================== -->
-  <section style="background:#FBF8F5; border-top:1px solid #F1EBE5;">
-    <div style="max-width:1280px; margin:0 auto; padding:clamp(72px,9vw,120px) clamp(20px,5vw,56px);">
-      <div style="display:flex; flex-wrap:wrap; align-items:flex-end; gap:24px; margin-bottom:34px;">
-        <div style="flex:1 1 380px;">
-          <div style="font-weight:700; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#FF4A17; margin-bottom:14px;">The marketplace</div>
-          <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(30px,4vw,48px); line-height:1.02; letter-spacing:-.03em; margin:0;">Africa's shelf,<br>open to the world.</h2>
-        </div>
-        <p style="flex:1 1 300px; font-size:16px; line-height:1.55; color:#6B635E; margin:0; max-width:420px;">From Lagos ankara to Accra shea butter, browse a curated marketplace where every product ships from a verified vendor — with global imports alongside.</p>
-      </div>
-
-      <!-- storefront frame -->
-      <div style="background:#fff; border:1px solid #ECE6E0; border-radius:24px; overflow:hidden; box-shadow:0 30px 70px -40px rgba(24,18,16,.3);">
-        <div style="display:flex; align-items:center; gap:10px; padding:16px 20px; border-bottom:1px solid #F1ECE6;">
-          <div style="display:flex; gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#FF5F57;"></span><span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E;"></span><span style="width:11px;height:11px;border-radius:50%;background:#28C840;"></span></div>
-          <div style="margin:0 auto; background:#F5F0EB; color:#9B938D; font-size:13px; font-weight:500; padding:7px 18px; border-radius:999px;">martx.io/marketplace</div>
-        </div>
-        <div style="padding:clamp(20px,3vw,32px);">
-          <div style="display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; margin-bottom:26px;">
-            <sc-for list="{{ catChips }}" as="c" hint-placeholder-count="7">
-              <span style="{{ c.style }}" onClick="{{ c.onClick }}">{{ c.name }}</span>
-            </sc-for>
-          </div>
-          <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:18px;">
-            <sc-for list="{{ visibleProducts }}" as="p" hint-placeholder-count="9">
-              <div style="border:1px solid #EFE9E3; border-radius:18px; overflow:hidden; background:#fff; cursor:pointer;" style-hover="border-color:#181210;">
-                <div style="position:relative; aspect-ratio:1/1; {{ p.thumbStyle }}">
-                  <sc-if value="{{ p.live }}" hint-placeholder-val="{{ true }}">
-                    <span style="position:absolute; top:11px; left:11px; display:flex; align-items:center; gap:5px; background:#FF1F1F; color:#fff; font-weight:800; font-size:10px; padding:5px 9px; border-radius:7px;"><span style="width:5px;height:5px;border-radius:50%;background:#fff;display:inline-block;animation:mx-pulse 1.3s infinite;"></span>LIVE</span>
-                  </sc-if>
-                  <span style="position:absolute; bottom:11px; left:11px; background:rgba(24,18,16,.55); backdrop-filter:blur(6px); color:#fff; font-size:11px; font-weight:600; padding:5px 9px; border-radius:8px;">{{ p.from }}</span>
-                </div>
-                <div style="padding:14px 15px 16px;">
-                  <div style="font-weight:700; font-size:15px; line-height:1.25; margin-bottom:4px; color:#181210;">{{ p.name }}</div>
-                  <div style="font-size:12.5px; color:#9B938D; margin-bottom:11px;">by {{ p.vendor }}</div>
-                  <div style="display:flex; align-items:center; gap:9px;">
-                    <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:18px; color:#181210;">{{ p.price }}</span>
-                    <span style="margin-left:auto; width:34px; height:34px; border-radius:10px; background:#FF4A17; color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700;">+</span>
-                  </div>
-                </div>
-              </div>
-            </sc-for>
-          </div>
-          <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
-            <div style="text-align:center; color:#9B938D; padding:40px; font-size:15px;">No products in this category yet.</div>
-          </sc-if>
-        </div>
+    <div style="overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);">
+      <div style="display:flex; gap:12px; width:max-content; animation:mx-marqR 36s linear infinite;" style-hover="animationPlayState:paused;">
+        <sc-for list="{{ categories }}" as="c" hint-placeholder-count="9">
+          <span style="flex:none; padding:11px 20px; border-radius:999px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); font-weight:600; font-size:15px; color:#CFC6BF; white-space:nowrap;">{{ c }}</span>
+        </sc-for>
+        <sc-for list="{{ categories }}" as="c" hint-placeholder-count="9">
+          <span style="flex:none; padding:11px 20px; border-radius:999px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); font-weight:600; font-size:15px; color:#CFC6BF; white-space:nowrap;">{{ c }}</span>
+        </sc-for>
       </div>
     </div>
   </section>
 
-  <!-- ===================== CREATOR ECONOMY + WALLET ===================== -->
-  <section style="max-width:1280px; margin:0 auto; padding:clamp(72px,9vw,124px) clamp(20px,5vw,56px); display:flex; flex-wrap:wrap; gap:56px; align-items:center;">
-    <div style="flex:1 1 400px; min-width:300px;">
-      <div style="font-weight:700; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#FF4A17; margin-bottom:16px;">Creator economy</div>
-      <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(30px,4vw,48px); line-height:1.02; letter-spacing:-.03em; margin:0 0 18px;">Fund. Shop. Gift your favourite creators.</h2>
-      <p style="font-size:17px; line-height:1.55; color:#6B635E; max-width:460px; margin:0 0 28px;">Shoppers top up a MartX wallet with Naira, buy from any vendor, and send virtual gifts to creators during live drops. Creators earn commissions and tips without ever holding inventory.</p>
-      <div style="display:flex; flex-direction:column; gap:14px; max-width:460px;">
-        <div style="display:flex; align-items:center; gap:14px;"><span style="width:34px;height:34px;border-radius:10px;background:#FFF3EC;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none;">💳</span><span style="font-size:15.5px; color:#3C3631;"><b style="color:#181210;">Fund in Naira</b> — top up instantly and check out in one tap.</span></div>
-        <div style="display:flex; align-items:center; gap:14px;"><span style="width:34px;height:34px;border-radius:10px;background:#FFF3EC;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none;">🎁</span><span style="font-size:15.5px; color:#3C3631;"><b style="color:#181210;">Gift creators live</b> — buy MartX coins and send them on stream.</span></div>
-        <div style="display:flex; align-items:center; gap:14px;"><span style="width:34px;height:34px;border-radius:10px;background:#FFF3EC;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none;">📈</span><span style="font-size:15.5px; color:#3C3631;"><b style="color:#181210;">Earn commissions</b> — creators sell vendor products for a cut.</span></div>
-      </div>
-    </div>
-    <!-- wallet card -->
-    <div style="flex:0 1 380px; min-width:300px; display:flex; justify-content:center;">
-      <div style="width:100%; max-width:380px;">
-        <div style="background:linear-gradient(135deg,#FF4A17,#E63E0C); border-radius:24px; padding:26px; color:#fff; box-shadow:0 26px 56px -24px rgba(255,74,23,.6);">
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:30px;">
-            <span style="font-weight:600; font-size:14px; opacity:.85;">MartX Wallet</span>
-            <img src="assets/martx-logo.png" alt="" style="width:30px;height:30px;object-fit:contain;filter:brightness(0) invert(1);opacity:.9;" />
-          </div>
-          <div style="font-size:13px; opacity:.8; margin-bottom:5px;">Available balance</div>
-          <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:42px; letter-spacing:-.02em; margin-bottom:24px;">₦84,500</div>
-          <div style="display:flex; gap:10px;">
-            <span style="flex:1; text-align:center; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.25); padding:12px; border-radius:13px; font-weight:700; font-size:14px;">+ Top up</span>
-            <span style="flex:1; text-align:center; background:#fff; color:#FF4A17; padding:12px; border-radius:13px; font-weight:700; font-size:14px;">Buy coins</span>
-          </div>
-        </div>
-        <div style="display:flex; gap:13px; margin-top:13px;">
-          <div style="flex:1; background:#fff; border:1px solid #EFE9E3; border-radius:18px; padding:18px;"><div style="font-size:24px; margin-bottom:8px;">🪙</div><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:24px;">12,400</div><div style="font-size:13px; color:#9B938D; font-weight:500;">MartX coins</div></div>
-          <div style="flex:1; background:#fff; border:1px solid #EFE9E3; border-radius:18px; padding:18px;"><div style="font-size:24px; margin-bottom:8px;">🎁</div><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:24px;">312</div><div style="font-size:13px; color:#9B938D; font-weight:500;">Gifts sent</div></div>
+  <!-- ===================== EXPORT ===================== -->
+  <section style="position:relative; overflow:hidden; border-top:1px solid rgba(255,255,255,.06);">
+    <div style="position:absolute; inset:0; background:radial-gradient(700px 520px at 20% 40%, rgba(155,108,255,.16), transparent 60%), radial-gradient(600px 460px at 92% 70%, rgba(255,176,32,.12), transparent 60%); pointer-events:none;"></div>
+    <div class="reveal" style="position:relative; max-width:1280px; margin:0 auto; padding:clamp(72px,9vw,120px) clamp(20px,5vw,56px); display:flex; flex-wrap:wrap; gap:48px; align-items:center;">
+      <div style="flex:1 1 420px; min-width:300px;">
+        <div style="font-weight:700; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:#9B6CFF; margin-bottom:16px;">African export gateway</div>
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(30px,4.4vw,52px); line-height:1.0; letter-spacing:-.03em; margin:0 0 18px;">Made in Africa.<br>Shipped to <span style="background:linear-gradient(120deg,#9B6CFF,#FF2E7E); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;">the world.</span></h2>
+        <p style="font-size:17px; line-height:1.55; color:#A89E98; max-width:470px; margin:0 0 26px;">Local vendors sell fashion, food, art and beauty straight to the diaspora and global buyers — with fulfilment and logistics coordinated end-to-end by MartX.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:10px;">
+          <span style="background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); padding:9px 16px; border-radius:999px; font-size:14px; font-weight:600;">🇺🇸 United States</span>
+          <span style="background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); padding:9px 16px; border-radius:999px; font-size:14px; font-weight:600;">🇬🇧 United Kingdom</span>
+          <span style="background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); padding:9px 16px; border-radius:999px; font-size:14px; font-weight:600;">🇨🇦 Canada</span>
+          <span style="background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); padding:9px 16px; border-radius:999px; font-size:14px; font-weight:600;">🇪🇺 Europe</span>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ===================== EXPORT GATEWAY ===================== -->
-  <section style="background:#181210; color:#fff;">
-    <div style="max-width:1280px; margin:0 auto; padding:clamp(72px,9vw,124px) clamp(20px,5vw,56px);">
-      <div style="display:flex; flex-wrap:wrap; gap:48px; align-items:center;">
-        <div style="flex:1 1 420px; min-width:300px;">
-          <div style="font-weight:700; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#FF8A4D; margin-bottom:16px;">African export gateway</div>
-          <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(30px,4vw,50px); line-height:1.02; letter-spacing:-.03em; margin:0 0 18px;">Made in Africa.<br>Shipped to the world.</h2>
-          <p style="font-size:17px; line-height:1.55; color:#C7BEB7; max-width:480px; margin:0 0 24px;">Local vendors sell fashion, food, art and beauty straight to the diaspora and global buyers in the US, UK, Canada and Europe — with fulfilment and logistics coordinated by MartX.</p>
-          <div style="display:flex; flex-wrap:wrap; gap:10px;">
-            <span style="background:#26201C; border:1px solid #36302B; padding:9px 16px; border-radius:999px; font-size:14px; font-weight:600;">🇺🇸 United States</span>
-            <span style="background:#26201C; border:1px solid #36302B; padding:9px 16px; border-radius:999px; font-size:14px; font-weight:600;">🇬🇧 United Kingdom</span>
-            <span style="background:#26201C; border:1px solid #36302B; padding:9px 16px; border-radius:999px; font-size:14px; font-weight:600;">🇨🇦 Canada</span>
-            <span style="background:#26201C; border:1px solid #36302B; padding:9px 16px; border-radius:999px; font-size:14px; font-weight:600;">🇪🇺 Europe</span>
-          </div>
-        </div>
-        <div style="flex:1 1 340px; min-width:280px; display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-          <div style="background:#26201C; border-radius:20px; padding:26px;"><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:38px; color:#FF8A4D; letter-spacing:-.02em;">B2C</div><div style="color:#C7BEB7; font-size:14px; margin-top:6px;">Diaspora buyers shop African brands directly.</div></div>
-          <div style="background:#26201C; border-radius:20px; padding:26px;"><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:38px; color:#FF8A4D; letter-spacing:-.02em;">B2B</div><div style="color:#C7BEB7; font-size:14px; margin-top:6px;">Wholesale & bulk sourcing, Alibaba-style.</div></div>
-          <div style="background:#FF4A17; border-radius:20px; padding:26px; grid-column:1 / -1;"><div style="display:flex; align-items:center; gap:14px;"><span style="font-size:30px;">🚚</span><div><div style="font-weight:700; font-size:16px;">Tracked, end-to-end logistics</div><div style="color:rgba(255,255,255,.85); font-size:13.5px; margin-top:3px;">DHL · FedEx · UPS · Aramex · local couriers — every order, supplier to door.</div></div></div></div>
-        </div>
+      <div style="flex:1 1 340px; min-width:280px; display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:20px; padding:26px;"><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:38px; letter-spacing:-.02em; background:linear-gradient(120deg,#FF6A2B,#FF2E7E); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;">B2C</div><div style="color:#A89E98; font-size:14px; margin-top:6px;">Diaspora buyers shop African brands directly.</div></div>
+        <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:20px; padding:26px;"><div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:38px; letter-spacing:-.02em; background:linear-gradient(120deg,#FFB020,#FF4A17); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;">B2B</div><div style="color:#A89E98; font-size:14px; margin-top:6px;">Wholesale & bulk sourcing, Alibaba-style.</div></div>
+        <div style="grid-column:1 / -1; background:linear-gradient(120deg,#FF4A17,#FF2E7E); border-radius:20px; padding:24px; display:flex; align-items:center; gap:14px;"><span style="font-size:30px;">🚚</span><div><div style="font-weight:700; font-size:16px;">Tracked, end-to-end logistics</div><div style="color:rgba(255,255,255,.85); font-size:13.5px; margin-top:3px;">DHL · FedEx · UPS · Aramex · local couriers.</div></div></div>
       </div>
     </div>
   </section>
 
   <!-- ===================== PRICING ===================== -->
-  <section style="max-width:1280px; margin:0 auto; padding:clamp(72px,9vw,124px) clamp(20px,5vw,56px);">
-    <div style="text-align:center; max-width:620px; margin:0 auto clamp(44px,5vw,60px);">
-      <div style="font-weight:700; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#FF4A17; margin-bottom:16px;">Vendor plans</div>
-      <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(32px,4.4vw,52px); line-height:1.02; letter-spacing:-.03em; margin:0 0 14px;">Start free. Go Pro when you go live.</h2>
-      <p style="font-size:18px; line-height:1.5; color:#6B635E; margin:0;">Recurring revenue for MartX, real tools for vendors. No setup fees.</p>
+  <section class="reveal" style="max-width:1280px; margin:0 auto; padding:clamp(72px,9vw,118px) clamp(20px,5vw,56px);">
+    <div style="text-align:center; max-width:620px; margin:0 auto clamp(40px,5vw,56px);">
+      <div style="font-weight:700; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:#FF6A2B; margin-bottom:16px;">Vendor plans</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(32px,4.6vw,54px); line-height:1.0; letter-spacing:-.03em; margin:0 0 14px;">Start free. Go Pro to go live.</h2>
+      <p style="font-size:18px; line-height:1.5; color:#A89E98; margin:0;">Recurring revenue for MartX, real tools for vendors. No setup fees.</p>
     </div>
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:22px; max-width:840px; margin:0 auto;">
-      <!-- free -->
-      <div style="border:1px solid #EFE9E3; border-radius:24px; padding:34px; background:#fff;">
-        <div style="font-weight:700; font-size:17px; margin-bottom:6px;">Free</div>
-        <div style="font-size:14px; color:#9B938D; margin-bottom:22px;">Get on the marketplace.</div>
-        <div style="display:flex; align-items:baseline; gap:5px; margin-bottom:26px;"><span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:48px; letter-spacing:-.02em;">$0</span><span style="color:#9B938D; font-size:15px;">/mo</span></div>
+      <div style="border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.03); border-radius:24px; padding:34px;">
+        <div style="font-weight:700; font-size:17px; margin-bottom:6px; color:#fff;">Free</div>
+        <div style="font-size:14px; color:#8A817B; margin-bottom:22px;">Get on the marketplace.</div>
+        <div style="display:flex; align-items:baseline; gap:5px; margin-bottom:26px;"><span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:48px; letter-spacing:-.02em;">$0</span><span style="color:#8A817B; font-size:15px;">/mo</span></div>
         <div style="display:flex; flex-direction:column; gap:13px; margin-bottom:28px;">
-          <div style="display:flex; gap:11px; font-size:15px; color:#3C3631;"><span style="color:#FF4A17; font-weight:800;">✓</span> Branded storefront</div>
-          <div style="display:flex; gap:11px; font-size:15px; color:#3C3631;"><span style="color:#FF4A17; font-weight:800;">✓</span> Product & order management</div>
-          <div style="display:flex; gap:11px; font-size:15px; color:#3C3631;"><span style="color:#FF4A17; font-weight:800;">✓</span> Naira wallet payouts</div>
-          <div style="display:flex; gap:11px; font-size:15px; color:#B7AFA8;"><span style="font-weight:800;">—</span> Live commerce</div>
+          <div style="display:flex; gap:11px; font-size:15px; color:#CFC6BF;"><span style="color:#FF6A2B; font-weight:800;">✓</span> Branded storefront</div>
+          <div style="display:flex; gap:11px; font-size:15px; color:#CFC6BF;"><span style="color:#FF6A2B; font-weight:800;">✓</span> Product & order management</div>
+          <div style="display:flex; gap:11px; font-size:15px; color:#CFC6BF;"><span style="color:#FF6A2B; font-weight:800;">✓</span> Naira wallet payouts</div>
+          <div style="display:flex; gap:11px; font-size:15px; color:#6E655F;"><span style="font-weight:800;">—</span> Live commerce</div>
         </div>
-        <a href="MartX App.dc.html#dashboard" style="display:block; text-align:center; cursor:pointer; font-weight:700; font-size:15px; color:#181210; background:#fff; border:1.5px solid #E7E1DB; padding:14px; border-radius:14px;" style-hover="border-color:#181210;">Open free store</a>
+        <a href="MartX App.dc.html#dashboard" style="display:block; text-align:center; font-weight:700; font-size:15px; color:#fff; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); padding:14px; border-radius:14px;" style-hover="background:rgba(255,255,255,.12);">Open free store</a>
       </div>
-      <!-- pro -->
-      <div style="border:2px solid #FF4A17; border-radius:24px; padding:34px; background:#fff; position:relative; box-shadow:0 26px 60px -30px rgba(255,74,23,.45);">
-        <span style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:#FF4A17; color:#fff; font-weight:800; font-size:12px; letter-spacing:.04em; padding:6px 16px; border-radius:999px;">MOST POPULAR</span>
-        <div style="font-weight:700; font-size:17px; margin-bottom:6px; color:#FF4A17;">Pro Vendor</div>
-        <div style="font-size:14px; color:#9B938D; margin-bottom:22px;">Unlock live selling & sourcing.</div>
-        <div style="display:flex; align-items:baseline; gap:5px; margin-bottom:26px;"><span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:48px; letter-spacing:-.02em;">$30</span><span style="color:#9B938D; font-size:15px;">/mo</span></div>
-        <div style="display:flex; flex-direction:column; gap:13px; margin-bottom:28px;">
-          <div style="display:flex; gap:11px; font-size:15px; color:#3C3631;"><span style="color:#FF4A17; font-weight:800;">✓</span> Everything in Free</div>
-          <div style="display:flex; gap:11px; font-size:15px; color:#3C3631;"><span style="color:#FF4A17; font-weight:800;">✓</span> Live commerce + multi-broadcast</div>
-          <div style="display:flex; gap:11px; font-size:15px; color:#3C3631;"><span style="color:#FF4A17; font-weight:800;">✓</span> 50,000+ product sourcing catalog</div>
-          <div style="display:flex; gap:11px; font-size:15px; color:#3C3631;"><span style="color:#FF4A17; font-weight:800;">✓</span> Analytics & premium dashboard</div>
-          <div style="display:flex; gap:11px; font-size:15px; color:#3C3631;"><span style="color:#FF4A17; font-weight:800;">✓</span> Social selling + priority support</div>
+      <div style="position:relative; border-radius:24px; padding:1.5px; background:linear-gradient(135deg,#FF6A2B,#FF2E7E,#9B6CFF); box-shadow:0 30px 70px -28px rgba(255,46,126,.5);">
+        <div style="background:#13100F; border-radius:23px; padding:34px;">
+          <span style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:linear-gradient(120deg,#FF6A2B,#FF2E7E); color:#fff; font-weight:800; font-size:12px; letter-spacing:.04em; padding:6px 16px; border-radius:999px;">MOST POPULAR</span>
+          <div style="font-weight:700; font-size:17px; margin-bottom:6px; background:linear-gradient(120deg,#FF6A2B,#FF2E7E); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;">Pro Vendor</div>
+          <div style="font-size:14px; color:#8A817B; margin-bottom:22px;">Unlock live selling & sourcing.</div>
+          <div style="display:flex; align-items:baseline; gap:5px; margin-bottom:26px;"><span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:48px; letter-spacing:-.02em;">$30</span><span style="color:#8A817B; font-size:15px;">/mo</span></div>
+          <div style="display:flex; flex-direction:column; gap:13px; margin-bottom:28px;">
+            <div style="display:flex; gap:11px; font-size:15px; color:#EDE7E2;"><span style="color:#FF2E7E; font-weight:800;">✓</span> Everything in Free</div>
+            <div style="display:flex; gap:11px; font-size:15px; color:#EDE7E2;"><span style="color:#FF2E7E; font-weight:800;">✓</span> Live commerce + multi-broadcast</div>
+            <div style="display:flex; gap:11px; font-size:15px; color:#EDE7E2;"><span style="color:#FF2E7E; font-weight:800;">✓</span> 50,000+ product sourcing catalog</div>
+            <div style="display:flex; gap:11px; font-size:15px; color:#EDE7E2;"><span style="color:#FF2E7E; font-weight:800;">✓</span> Analytics & premium dashboard</div>
+            <div style="display:flex; gap:11px; font-size:15px; color:#EDE7E2;"><span style="color:#FF2E7E; font-weight:800;">✓</span> Social selling + priority support</div>
+          </div>
+          <a href="MartX App.dc.html#dashboard" style="display:block; text-align:center; font-weight:700; font-size:15px; color:#fff; background:linear-gradient(120deg,#FF6A2B,#FF2E7E); padding:14px; border-radius:14px; box-shadow:0 14px 32px -12px rgba(255,46,126,.6);" style-hover="filter:brightness(1.08);">Go Pro</a>
         </div>
-        <a href="MartX App.dc.html#dashboard" style="display:block; text-align:center; cursor:pointer; font-weight:700; font-size:15px; color:#fff; background:#FF4A17; padding:14px; border-radius:14px; box-shadow:0 12px 28px -12px rgba(255,74,23,.7);" style-hover="background:#E63E0C;">Go Pro</a>
       </div>
     </div>
   </section>
 
   <!-- ===================== FINAL CTA ===================== -->
   <section style="max-width:1280px; margin:0 auto; padding:0 clamp(20px,5vw,56px) clamp(72px,8vw,110px);">
-    <div style="background:linear-gradient(135deg,#FF4A17,#E63E0C); border-radius:32px; padding:clamp(44px,6vw,80px); text-align:center; color:#fff; position:relative; overflow:hidden;">
-      <div style="position:absolute; top:-60px; right:-40px; width:240px; height:240px; border-radius:50%; background:rgba(255,255,255,.1);"></div>
-      <div style="position:absolute; bottom:-80px; left:-30px; width:200px; height:200px; border-radius:50%; background:rgba(255,255,255,.08);"></div>
-      <div style="position:relative;">
-        <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(32px,5vw,58px); line-height:1.0; letter-spacing:-.03em; margin:0 0 18px;">Build your store.<br>Go live. Sell to the world.</h2>
-        <p style="font-size:18px; line-height:1.5; color:rgba(255,255,255,.9); max-width:520px; margin:0 auto 32px;">Join the marketplace powering Africa's next generation of vendors and creators.</p>
-        <div style="display:flex; flex-wrap:wrap; gap:13px; justify-content:center;">
-          <a href="MartX App.dc.html#explore" style="cursor:pointer; font-weight:700; font-size:16px; color:#FF4A17; background:#fff; padding:16px 32px; border-radius:14px;">Start selling free</a>
-          <span style="cursor:pointer; font-weight:700; font-size:16px; color:#fff; background:rgba(255,255,255,.16); border:1.5px solid rgba(255,255,255,.4); padding:16px 32px; border-radius:14px;">Talk to our team</span>
-        </div>
+    <div class="reveal" style="position:relative; overflow:hidden; border-radius:32px; padding:clamp(48px,7vw,92px) clamp(24px,5vw,64px); text-align:center; border:1px solid rgba(255,255,255,.1); background:radial-gradient(800px 500px at 20% 0%, rgba(255,74,23,.4), transparent 60%), radial-gradient(700px 500px at 90% 100%, rgba(255,46,126,.36), transparent 60%), radial-gradient(600px 500px at 60% 50%, rgba(155,108,255,.24), transparent 60%), #140A0E;">
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:clamp(32px,5.4vw,64px); line-height:.98; letter-spacing:-.03em; margin:0 0 18px;">Your store. Your stream.<br>The whole world watching.</h2>
+      <p style="font-size:18px; line-height:1.5; color:#D6CDC6; max-width:520px; margin:0 auto 34px;">Join the marketplace powering Africa's next generation of vendors and creators.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center;">
+        <a href="MartX App.dc.html#dashboard" style="font-weight:700; font-size:16px; color:#0C0A0B; background:#fff; padding:16px 32px; border-radius:14px;" style-hover="transform:translateY(-2px);">Start selling free →</a>
+        <a href="MartX App.dc.html#explore" style="font-weight:700; font-size:16px; color:#fff; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.28); padding:16px 32px; border-radius:14px;" style-hover="background:rgba(255,255,255,.2);">Explore the marketplace</a>
       </div>
     </div>
   </section>
 
   <!-- ===================== FOOTER ===================== -->
-  <footer style="border-top:1px solid #F0EAE4; background:#fff;">
+  <footer style="border-top:1px solid rgba(255,255,255,.07);">
     <div style="max-width:1280px; margin:0 auto; padding:clamp(40px,5vw,64px) clamp(20px,5vw,56px); display:flex; flex-wrap:wrap; gap:40px; justify-content:space-between;">
       <div style="max-width:300px;">
         <div style="display:flex; align-items:center; gap:11px; margin-bottom:16px;">
-          <img src="assets/martx-logo.png" alt="MartX" style="width:34px; height:34px; object-fit:contain;" />
-          <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:21px; letter-spacing:-.02em;">MartX</span>
+          <img src="assets/martx-logo.png" alt="MartX" style="width:32px; height:32px; object-fit:contain;" />
+          <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:20px; letter-spacing:-.02em;">Mart<span style="color:#FF4A17;">X</span></span>
         </div>
-        <p style="font-size:14.5px; line-height:1.55; color:#8A827C; margin:0;">The live shopping marketplace for Africa. Source, sell and stream — to the world.</p>
+        <p style="font-size:14.5px; line-height:1.55; color:#8A817B; margin:0;">The live-shopping marketplace for Africa. Source, sell and stream — to the world.</p>
       </div>
       <div style="display:flex; gap:clamp(36px,6vw,80px); flex-wrap:wrap;">
         <div>
-          <div style="font-weight:700; font-size:13px; color:#181210; margin-bottom:14px;">Marketplace</div>
-          <div style="display:flex; flex-direction:column; gap:11px; font-size:14px; color:#8A827C;"><span style="cursor:pointer;">Shop products</span><span style="cursor:pointer;">Live now</span><span style="cursor:pointer;">Categories</span><span style="cursor:pointer;">Export gateway</span></div>
+          <div style="font-weight:700; font-size:12px; letter-spacing:.12em; color:#6E655F; margin-bottom:14px;">MARKETPLACE</div>
+          <div style="display:flex; flex-direction:column; gap:11px; font-size:14px; color:#A89E98;"><a href="MartX App.dc.html#explore" style="color:#A89E98;" style-hover="color:#fff;">Shop products</a><a href="MartX App.dc.html#explore" style="color:#A89E98;" style-hover="color:#fff;">Live now</a><a href="MartX App.dc.html#explore" style="color:#A89E98;" style-hover="color:#fff;">Categories</a></div>
         </div>
         <div>
-          <div style="font-weight:700; font-size:13px; color:#181210; margin-bottom:14px;">Sell</div>
-          <div style="display:flex; flex-direction:column; gap:11px; font-size:14px; color:#8A827C;"><span style="cursor:pointer;">Open a store</span><span style="cursor:pointer;">Go live</span><span style="cursor:pointer;">Sourcing catalog</span><span style="cursor:pointer;">Pricing</span></div>
+          <div style="font-weight:700; font-size:12px; letter-spacing:.12em; color:#6E655F; margin-bottom:14px;">SELL</div>
+          <div style="display:flex; flex-direction:column; gap:11px; font-size:14px; color:#A89E98;"><a href="MartX App.dc.html#dashboard" style="color:#A89E98;" style-hover="color:#fff;">Open a store</a><a href="MartX App.dc.html#dashboard" style="color:#A89E98;" style-hover="color:#fff;">Go live</a><a href="MartX App.dc.html#wallet" style="color:#A89E98;" style-hover="color:#fff;">Wallet</a></div>
         </div>
         <div>
-          <div style="font-weight:700; font-size:13px; color:#181210; margin-bottom:14px;">Company</div>
-          <div style="display:flex; flex-direction:column; gap:11px; font-size:14px; color:#8A827C;"><span style="cursor:pointer;">About</span><span style="cursor:pointer;">Creators</span><span style="cursor:pointer;">Logistics</span><span style="cursor:pointer;">Contact</span></div>
+          <div style="font-weight:700; font-size:12px; letter-spacing:.12em; color:#6E655F; margin-bottom:14px;">COMPANY</div>
+          <div style="display:flex; flex-direction:column; gap:11px; font-size:14px; color:#A89E98;"><span style="cursor:pointer;" style-hover="color:#fff;">About</span><span style="cursor:pointer;" style-hover="color:#fff;">Creators</span><span style="cursor:pointer;" style-hover="color:#fff;">Contact</span></div>
         </div>
       </div>
     </div>
-    <div style="border-top:1px solid #F0EAE4;">
-      <div style="max-width:1280px; margin:0 auto; padding:20px clamp(20px,5vw,56px); display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; font-size:13px; color:#9B938D;">
+    <div style="border-top:1px solid rgba(255,255,255,.07);">
+      <div style="max-width:1280px; margin:0 auto; padding:20px clamp(20px,5vw,56px); display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; font-size:13px; color:#6E655F;">
         <span>© 2026 MartX. All rights reserved.</span>
         <span style="display:flex; gap:22px;"><span style="cursor:pointer;">Privacy</span><span style="cursor:pointer;">Terms</span><span style="cursor:pointer;">Vendor agreement</span></span>
       </div>
@@ -410,97 +432,84 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
 class Component extends DCLogic {
   state = {
-    simulcast: { x: true, instagram: true, facebook: false, youtube: true },
-    category: 'All',
-    live: true,
+    sim: { x: true, instagram: true, facebook: false, youtube: true },
+    stats: { products: 0, suppliers: 0, creators: 0 },
   };
 
-  toggleSim(key) {
-    this.setState(s => ({ simulcast: { ...s.simulcast, [key]: !s.simulcast[key] } }));
+  componentDidMount() {
+    // count up
+    const targets = { products: 50000, suppliers: 150, creators: 12000 };
+    const dur = 1500, t0 = performance.now();
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+    const tick = (now) => {
+      const p = Math.min(1, (now - t0) / dur), e = ease(p);
+      this.setState({ stats: {
+        products: Math.round(targets.products * e),
+        suppliers: Math.round(targets.suppliers * e),
+        creators: Math.round(targets.creators * e),
+      } });
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
   }
 
+  toggleSim(key) { this.setState(s => ({ sim: { ...s.sim, [key]: !s.sim[key] } })); }
+
+  fmtK(n) { if (n >= 1000) { const k = n / 1000; return (k >= 10 ? Math.round(k) : k.toFixed(1)) + 'K'; } return '' + n; }
+
   renderVals() {
-    const sim = this.state.simulcast;
-    const platformDefs = [
-      { key: 'x',         name: 'X',         label: 'X' },
+    const U = (id) => 'https://images.unsplash.com/' + id + '?w=600&q=80&auto=format&fit=crop';
+    const sim = this.state.sim;
+    const defs = [
+      { key: 'x', name: 'X', label: 'X' },
       { key: 'instagram', name: 'Instagram', label: 'IG' },
-      { key: 'facebook',  name: 'Facebook',  label: 'f' },
-      { key: 'youtube',   name: 'YouTube',   label: 'YT' },
+      { key: 'facebook', name: 'Facebook', label: 'f' },
+      { key: 'youtube', name: 'YouTube', label: 'YT' },
     ];
-    const platformList = platformDefs.map(p => {
+    const platformList = defs.map(p => {
       const on = !!sim[p.key];
       return {
-        ...p,
-        on,
+        ...p, on,
         onClick: () => this.toggleSim(p.key),
         chipStyle: {
-          display: 'flex', alignItems: 'center', gap: '10px',
-          padding: '12px 16px', borderRadius: '14px', cursor: 'pointer',
-          border: '1.5px solid ' + (on ? '#181210' : '#ECE7E2'),
-          background: on ? '#181210' : '#FFFFFF',
-          color: on ? '#FFFFFF' : '#9B938D',
-          fontWeight: 600, fontSize: '15px', transition: 'all .18s ease',
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 16px',
+          borderRadius: '14px', cursor: 'pointer', transition: 'all .18s ease',
+          fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600, fontSize: '15px',
+          border: '1px solid ' + (on ? 'rgba(255,255,255,.28)' : 'rgba(255,255,255,.08)'),
+          background: on ? 'rgba(255,255,255,.08)' : 'rgba(255,255,255,.02)',
+          color: on ? '#fff' : '#7A716B',
         },
         badgeStyle: {
-          width: '30px', height: '30px', borderRadius: '9px',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontWeight: 800, fontSize: '13px',
-          background: on ? '#FF4A17' : '#F3EEE9',
-          color: on ? '#FFFFFF' : '#B7AFA8',
+          width: '30px', height: '30px', borderRadius: '9px', display: 'flex',
+          alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '13px',
+          background: on ? 'linear-gradient(135deg,#FF6A2B,#FF2E7E)' : 'rgba(255,255,255,.06)',
+          color: on ? '#fff' : '#7A716B',
         },
-        dotStyle: {
-          marginLeft: 'auto', width: '9px', height: '9px', borderRadius: '50%',
-          background: on ? '#22C55E' : '#D8D2CC',
-        },
-        statusText: on ? 'Live' : 'Off',
+        dotStyle: { marginLeft: 'auto', width: '9px', height: '9px', borderRadius: '50%', background: on ? '#38E08A' : '#4A4440' },
       };
     });
-    const liveCount = platformList.filter(p => p.on).length;
 
-    const categories = ['All', 'Fashion', 'Beauty', 'Electronics', 'Home', 'Food & Spice', 'Art'];
-    const setCategory = (c) => this.setState({ category: c });
-    const catChips = categories.map(c => ({
-      name: c,
-      active: this.state.category === c,
-      onClick: () => setCategory(c),
-      style: {
-        padding: '10px 18px', borderRadius: '999px', cursor: 'pointer',
-        fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 600, fontSize: '14px',
-        whiteSpace: 'nowrap', transition: 'all .15s ease',
-        border: '1.5px solid ' + (this.state.category === c ? '#181210' : '#ECE7E2'),
-        background: this.state.category === c ? '#181210' : '#FFFFFF',
-        color: this.state.category === c ? '#FFFFFF' : '#56504B',
-      },
-    }));
+    const products = [
+      { name: 'Ankara Wrap Dress',   price: '₦18,500', vendor: 'Lola Threads',    live: true,  img: U('photo-1617922001439-4a2e6562f328') },
+      { name: 'Beaded Crown Set',    price: '₦12,800', vendor: 'Zuri Craft',      live: false, img: U('photo-1599643478518-a784e5dc4c8f') },
+      { name: 'Wireless Earbuds Pro',price: '₦24,000', vendor: 'TechHub NG',      live: false, img: U('photo-1590658268037-6bf12165a8df') },
+      { name: 'Handwoven Kente Throw',price:'₦32,000', vendor: 'Asante Looms',    live: true,  img: U('photo-1610030469983-98e550d6193c') },
+      { name: 'Shea Glow Body Oil',  price: '₦6,900',  vendor: 'Kọ́la Beauty',     live: false, img: U('photo-1556228720-195a672e8a03') },
+      { name: 'Adire Silk Headwrap', price: '₦9,500',  vendor: 'Lola Threads',    live: false, img: U('photo-1531123897727-8f129e1688ce') },
+      { name: 'Jollof Spice Blend',  price: '₦4,200',  vendor: 'Mama Spice Co.',  live: true,  img: U('photo-1596040033229-a9821ebd058d') },
+      { name: 'Silver Moon Necklace',price: '₦15,200', vendor: 'CraftedByElena',  live: false, img: U('photo-1611652022419-a9419f74343d') },
+    ].map(p => ({ ...p, thumbStyle: { position: 'absolute', inset: 0, width: '100%', height: '100%', backgroundImage: 'url(' + p.img + ')', backgroundSize: 'cover', backgroundPosition: 'center' } }));
 
-    const U = (id) => 'https://images.unsplash.com/' + id + '?w=800&q=80&auto=format&fit=crop';
-    const allProducts = [
-      { name: 'Ankara Wrap Dress',   price: '₦18,500', vendor: 'Lola Threads',   cat: 'Fashion',     from: '🇳🇬 Lagos',    a: '#FF4A17', b: '#FF9248', img: U('photo-1617922001439-4a2e6562f328') },
-      { name: 'Shea Glow Body Oil',  price: '₦6,900',  vendor: 'Kọ́la Beauty',    cat: 'Beauty',      from: '🇬🇭 Accra',    a: '#E8923A', b: '#F6C77E', img: U('photo-1556228720-195a672e8a03') },
-      { name: 'Wireless Earbuds Pro',price: '₦24,000', vendor: 'TechHub NG',     cat: 'Electronics', from: '🌍 Import',    a: '#2B2622', b: '#5C534C', img: U('photo-1590658268037-6bf12165a8df') },
-      { name: 'Handwoven Kente Throw',price: '₦32,000',vendor: 'Asante Looms',   cat: 'Home',        from: '🇬🇭 Kumasi',   a: '#C9461B', b: '#F2A65A', img: U('photo-1610030469983-98e550d6193c') },
-      { name: 'Jollof Spice Blend',  price: '₦4,200',  vendor: 'Mama Spice Co.', cat: 'Food & Spice',from: '🇳🇬 Ibadan',   a: '#D9531E', b: '#F4B23E', img: U('photo-1596040033229-a9821ebd058d') },
-      { name: 'Beaded Statement Set', price: '₦12,800',vendor: 'Zuri Craft',     cat: 'Art',         from: '🇰🇪 Nairobi',  a: '#B23E12', b: '#FF7A3C', img: U('photo-1599643478518-a784e5dc4c8f') },
-      { name: 'Adire Silk Headwrap', price: '₦9,500',  vendor: 'Lola Threads',   cat: 'Fashion',     from: '🇳🇬 Abeokuta', a: '#FF6126', b: '#FFB066', img: U('photo-1531123897727-8f129e1688ce') },
-      { name: 'Black Soap + Loofah',  price: '₦3,800', vendor: 'Kọ́la Beauty',    cat: 'Beauty',      from: '🇬🇭 Accra',    a: '#7A4B2A', b: '#C99A6A', img: U('photo-1600857544200-b2f666a9a2ec') },
-      { name: 'Minimalist Smart Watch', price: '₦15,200',vendor: 'TechHub NG',   cat: 'Electronics', from: '🌍 Import',    a: '#3A332E', b: '#7E7167', img: U('photo-1523275335684-37898b6baf30') },
-    ];
-    const cat = this.state.category;
-    const visibleProducts = (cat === 'All' ? allProducts : allProducts.filter(p => p.cat === cat))
-      .map((p, i) => ({
-        ...p,
-        thumbStyle: { backgroundImage: 'url(' + p.img + ')', backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#F5F0EB' },
-        live: i % 4 === 0,
-      }));
+    const categories = ['Ankara & Fashion', 'Beauty & Skincare', 'Electronics', 'Home & Decor', 'Food & Spice', 'Jewelry', 'Art & Craft', 'Sneakers', 'Wholesale'];
 
     return {
       platformList,
-      liveCount,
-      toggleSim: (k) => this.toggleSim(k),
-      catChips,
-      visibleProducts,
-      empty: visibleProducts.length === 0,
+      liveCount: platformList.filter(p => p.on).length,
+      products,
+      categories,
+      statProducts: this.fmtK(this.state.stats.products),
+      statSuppliers: '' + this.state.stats.suppliers,
+      statCreators: this.fmtK(this.state.stats.creators),
     };
   }
 }
